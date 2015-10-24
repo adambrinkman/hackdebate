@@ -2,21 +2,32 @@ package com.svc.debate.service;
 
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.svc.debate.model.Post;
-import org.sql2o.*;
-import java.util.UUID;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.Date;
 import java.util.List;
-import javax.sql.DataSource;
-import java.sql.SQLException;
-import java.sql.*;
+import java.util.UUID;
+import org.sql2o.Sql2o;
 /**
  * Created by dsawla on 10/24/2015.
  */
 public class DatabaseService {
 
-    public static Sql2o returnString() {
-        Sql2o sql2o = new Sql2o("jdbc:postgresql://localhost:3306/myDB", "myUsername", "topSecretPassword");
-        return sql2o;
+    public static Sql2o SQL_INSTANCE = null;
+
+    public static Sql2o getSqlInstance() {
+        URI dbUri = null;
+        try {
+            dbUri = new URI(System.getenv("DATABASE_URL"));
+            String username = dbUri.getUserInfo().split(":")[0];
+            String password = dbUri.getUserInfo().split(":")[1];
+            String dbUrl = "jdbc:postgresql://" + dbUri.getHost() + dbUri.getPath();
+//        Sql2o sql2o = new Sql2o("jdbc:postgresql://localhost:3306/myDB", "myUsername", "topSecretPassword");
+            SQL_INSTANCE = new Sql2o(dbUrl, username, password);
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
+        return SQL_INSTANCE;
     }
 
     public boolean authenticateUser(String username, String password) {
@@ -29,7 +40,7 @@ public class DatabaseService {
 
     /*creates a new post*/
     public UUID insertPost(String title, String text) {
-        Sql2o sql2o = returnString();
+        Sql2o sql2o = getSqlInstance();
         Post post = new Post();
         ObjectIdGenerators.UUIDGenerator uuidGenerator = new ObjectIdGenerators.UUIDGenerator();
         UUID postUuid = uuidGenerator.generateId(post);
@@ -50,7 +61,7 @@ public class DatabaseService {
 
     /*returns a list of posts for a particular post_id*/
     public List<Post> getAllPostsOn(UUID post) {
-        Sql2o sql2o = returnString();
+        Sql2o sql2o = getSqlInstance();
         try (org.sql2o.Connection conn = sql2o.open()) {
             return conn.createQuery("select * from comments where post_uuid=:post_uuid")
                     .addParameter("post_uuid", post)
@@ -59,7 +70,7 @@ public class DatabaseService {
     }
 
     private List<String> getCategoriesFor(UUID post_uuid) {
-        Sql2o sql2o = returnString();
+        Sql2o sql2o = getSqlInstance();
         try (org.sql2o.Connection conn = sql2o.open()) {
             return conn.createQuery("select category from posts_categories where post_uuid=:post_uuid")
                     .addParameter("post_uuid", post_uuid)
