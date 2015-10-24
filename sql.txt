@@ -30,18 +30,18 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
--- Name: courses; Type: TABLE; Schema: public; Owner: Adam; Tablespace: 
+-- Name: course; Type: TABLE; Schema: public; Owner: Adam; Tablespace: 
 --
 
-CREATE TABLE courses (
+CREATE TABLE course (
     course_id integer NOT NULL,
     user_id character varying(100),
-    student_ids character varying(100),
-    name character varying(100)
+    name character varying(100),
+    student_ids integer[]
 );
 
 
-ALTER TABLE courses OWNER TO "Adam";
+ALTER TABLE course OWNER TO "Adam";
 
 --
 -- Name: course_course_id_seq; Type: SEQUENCE; Schema: public; Owner: Adam
@@ -61,22 +61,24 @@ ALTER TABLE course_course_id_seq OWNER TO "Adam";
 -- Name: course_course_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: Adam
 --
 
-ALTER SEQUENCE course_course_id_seq OWNED BY courses.course_id;
+ALTER SEQUENCE course_course_id_seq OWNED BY course.course_id;
 
 
 --
--- Name: debates; Type: TABLE; Schema: public; Owner: Adam; Tablespace: 
+-- Name: debate; Type: TABLE; Schema: public; Owner: Adam; Tablespace: 
 --
 
-CREATE TABLE debates (
+CREATE TABLE debate (
     debate_id integer NOT NULL,
     course_id character varying(100),
     start_time timestamp without time zone,
-    end_time timestamp without time zone
+    end_time timestamp without time zone,
+    in_favor integer[],
+    against integer[]
 );
 
 
-ALTER TABLE debates OWNER TO "Adam";
+ALTER TABLE debate OWNER TO "Adam";
 
 --
 -- Name: debates_debate_id_seq; Type: SEQUENCE; Schema: public; Owner: Adam
@@ -96,22 +98,22 @@ ALTER TABLE debates_debate_id_seq OWNER TO "Adam";
 -- Name: debates_debate_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: Adam
 --
 
-ALTER SEQUENCE debates_debate_id_seq OWNED BY debates.debate_id;
+ALTER SEQUENCE debates_debate_id_seq OWNED BY debate.debate_id;
 
 
 --
--- Name: posts; Type: TABLE; Schema: public; Owner: Adam; Tablespace: 
+-- Name: post; Type: TABLE; Schema: public; Owner: Adam; Tablespace: 
 --
 
-CREATE TABLE posts (
+CREATE TABLE post (
     post_id integer NOT NULL,
     "time" timestamp without time zone,
     text character varying(3000),
-    user_id character varying(100)
+    user_id integer
 );
 
 
-ALTER TABLE posts OWNER TO "Adam";
+ALTER TABLE post OWNER TO "Adam";
 
 --
 -- Name: posts_post_id_seq; Type: SEQUENCE; Schema: public; Owner: Adam
@@ -131,14 +133,14 @@ ALTER TABLE posts_post_id_seq OWNER TO "Adam";
 -- Name: posts_post_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: Adam
 --
 
-ALTER SEQUENCE posts_post_id_seq OWNED BY posts.post_id;
+ALTER SEQUENCE posts_post_id_seq OWNED BY post.post_id;
 
 
 --
--- Name: users; Type: TABLE; Schema: public; Owner: Adam; Tablespace: 
+-- Name: user; Type: TABLE; Schema: public; Owner: Adam; Tablespace: 
 --
 
-CREATE TABLE users (
+CREATE TABLE "user" (
     user_id integer NOT NULL,
     sid character varying(100),
     email character varying(100),
@@ -150,7 +152,7 @@ CREATE TABLE users (
 );
 
 
-ALTER TABLE users OWNER TO "Adam";
+ALTER TABLE "user" OWNER TO "Adam";
 
 --
 -- Name: users_user_id_seq; Type: SEQUENCE; Schema: public; Owner: Adam
@@ -170,35 +172,43 @@ ALTER TABLE users_user_id_seq OWNER TO "Adam";
 -- Name: users_user_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: Adam
 --
 
-ALTER SEQUENCE users_user_id_seq OWNED BY users.user_id;
+ALTER SEQUENCE users_user_id_seq OWNED BY "user".user_id;
 
 
 --
 -- Name: course_id; Type: DEFAULT; Schema: public; Owner: Adam
 --
 
-ALTER TABLE ONLY courses ALTER COLUMN course_id SET DEFAULT nextval('course_course_id_seq'::regclass);
+ALTER TABLE ONLY course ALTER COLUMN course_id SET DEFAULT nextval('course_course_id_seq'::regclass);
 
 
 --
 -- Name: debate_id; Type: DEFAULT; Schema: public; Owner: Adam
 --
 
-ALTER TABLE ONLY debates ALTER COLUMN debate_id SET DEFAULT nextval('debates_debate_id_seq'::regclass);
+ALTER TABLE ONLY debate ALTER COLUMN debate_id SET DEFAULT nextval('debates_debate_id_seq'::regclass);
 
 
 --
 -- Name: post_id; Type: DEFAULT; Schema: public; Owner: Adam
 --
 
-ALTER TABLE ONLY posts ALTER COLUMN post_id SET DEFAULT nextval('posts_post_id_seq'::regclass);
+ALTER TABLE ONLY post ALTER COLUMN post_id SET DEFAULT nextval('posts_post_id_seq'::regclass);
 
 
 --
 -- Name: user_id; Type: DEFAULT; Schema: public; Owner: Adam
 --
 
-ALTER TABLE ONLY users ALTER COLUMN user_id SET DEFAULT nextval('users_user_id_seq'::regclass);
+ALTER TABLE ONLY "user" ALTER COLUMN user_id SET DEFAULT nextval('users_user_id_seq'::regclass);
+
+
+--
+-- Data for Name: course; Type: TABLE DATA; Schema: public; Owner: Adam
+--
+
+COPY course (course_id, user_id, name, student_ids) FROM stdin;
+\.
 
 
 --
@@ -209,18 +219,10 @@ SELECT pg_catalog.setval('course_course_id_seq', 1, false);
 
 
 --
--- Data for Name: courses; Type: TABLE DATA; Schema: public; Owner: Adam
+-- Data for Name: debate; Type: TABLE DATA; Schema: public; Owner: Adam
 --
 
-COPY courses (course_id, user_id, student_ids, name) FROM stdin;
-\.
-
-
---
--- Data for Name: debates; Type: TABLE DATA; Schema: public; Owner: Adam
---
-
-COPY debates (debate_id, course_id, start_time, end_time) FROM stdin;
+COPY debate (debate_id, course_id, start_time, end_time, in_favor, against) FROM stdin;
 \.
 
 
@@ -232,10 +234,10 @@ SELECT pg_catalog.setval('debates_debate_id_seq', 1, false);
 
 
 --
--- Data for Name: posts; Type: TABLE DATA; Schema: public; Owner: Adam
+-- Data for Name: post; Type: TABLE DATA; Schema: public; Owner: Adam
 --
 
-COPY posts (post_id, "time", text, user_id) FROM stdin;
+COPY post (post_id, "time", text, user_id) FROM stdin;
 \.
 
 
@@ -247,10 +249,10 @@ SELECT pg_catalog.setval('posts_post_id_seq', 1, false);
 
 
 --
--- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: Adam
+-- Data for Name: user; Type: TABLE DATA; Schema: public; Owner: Adam
 --
 
-COPY users (user_id, sid, email, user_name, first_name, last_name, password, role) FROM stdin;
+COPY "user" (user_id, sid, email, user_name, first_name, last_name, password, role) FROM stdin;
 \.
 
 
@@ -265,7 +267,7 @@ SELECT pg_catalog.setval('users_user_id_seq', 1, false);
 -- Name: course_pkey; Type: CONSTRAINT; Schema: public; Owner: Adam; Tablespace: 
 --
 
-ALTER TABLE ONLY courses
+ALTER TABLE ONLY course
     ADD CONSTRAINT course_pkey PRIMARY KEY (course_id);
 
 
@@ -273,7 +275,7 @@ ALTER TABLE ONLY courses
 -- Name: debates_pkey; Type: CONSTRAINT; Schema: public; Owner: Adam; Tablespace: 
 --
 
-ALTER TABLE ONLY debates
+ALTER TABLE ONLY debate
     ADD CONSTRAINT debates_pkey PRIMARY KEY (debate_id);
 
 
@@ -281,7 +283,7 @@ ALTER TABLE ONLY debates
 -- Name: posts_pkey; Type: CONSTRAINT; Schema: public; Owner: Adam; Tablespace: 
 --
 
-ALTER TABLE ONLY posts
+ALTER TABLE ONLY post
     ADD CONSTRAINT posts_pkey PRIMARY KEY (post_id);
 
 
@@ -289,7 +291,7 @@ ALTER TABLE ONLY posts
 -- Name: users_pkey; Type: CONSTRAINT; Schema: public; Owner: Adam; Tablespace: 
 --
 
-ALTER TABLE ONLY users
+ALTER TABLE ONLY "user"
     ADD CONSTRAINT users_pkey PRIMARY KEY (user_id);
 
 
