@@ -50,6 +50,11 @@
             <version>3.4</version>
         </dependency>
         <dependency>
+            <groupId>org.sql2o</groupId>
+            <artifactId>sql2o</artifactId>
+            <version>1.5.4</version>
+        </dependency>
+        <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
             <version>9.4-1201-jdbc41</version>
@@ -58,6 +63,16 @@
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
             <version>2.3.1</version>
+        </dependency>
+        <dependency>
+            <groupId>io.socket</groupId>
+            <artifactId>socket.io-client</artifactId>
+            <version>0.6.2</version>
+        </dependency>
+        <dependency>
+            <groupId>com.corundumstudio.socketio</groupId>
+            <artifactId>netty-socketio</artifactId>
+            <version>1.7.6</version>
         </dependency>
     </dependencies>
 
