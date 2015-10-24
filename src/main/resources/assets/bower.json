@@ -1,0 +1,22 @@
+{
+  "name": "assets",
+  "version": "0.0.1",
+  "homepage": "https://github.com/doyonghoon/hackdebate",
+  "authors": [
+    "SpencerDo <magicdo7@gmail.com>"
+  ],
+  "description": "learning by an interaction",
+  "keywords": [
+    "learning",
+    "education",
+    "debate"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
