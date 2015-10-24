@@ -3,7 +3,7 @@ $(document).ready(function() {
   socket.debug = true;
   socket.timeoutInterval = 5400;
 
-	$('#send-post').onclick(function() {
+	$('#send-post').click(function() {
 		var userId = '';
 		var timestamp = new Date().getTime();
 		var text = $('#debate-text');
@@ -15,8 +15,8 @@ $(document).ready(function() {
 function createPost(userId, timestamp, text) {
 	var post = {
 		"userId": userId,
-		"timestamp":, timestamp,
-		"text", text
+		"timestamp": timestamp,
+		"text": text
 	};
 	return post;
 }

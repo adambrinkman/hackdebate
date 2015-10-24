@@ -44,7 +44,7 @@ public class Main {
       Authenticate authenticate = new Authenticate();
       DatabaseService db = new DatabaseService();
       boolean flag = db.authenticateUser(req.params("username"), req.params("password"));
-      if(!flag)
+      if (!flag)
         return freeMarkerEngine.render(new ModelAndView(null, "assets/home.ftl"));
       else
         return freeMarkerEngine.render(new ModelAndView(null, "assets/page1.ftl"));

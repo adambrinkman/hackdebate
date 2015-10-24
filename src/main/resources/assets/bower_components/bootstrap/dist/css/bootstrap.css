@@ -233,6 +233,7 @@ th {
   h3 {
     orphans: 3;
     widows: 3;
+    margin: auto;
   }
   h2,
   h3 {
@@ -6798,3 +6799,20 @@ button.close {
   }
 }
 /*# sourceMappingURL=bootstrap.css.map */
+#classSelection {
+  width: 80%;
+  margin: auto;
+}
+
+.row.vdivide [class*='col-']:not(:last-child):after {
+  background: gray;
+  width: 2px;
+  content: "";
+  display:block;
+  position: absolute;
+  top:0;
+  bottom: 0;
+  right: 0;
+  min-height: 10px;
+  margin-bottom: 10px;
+}
