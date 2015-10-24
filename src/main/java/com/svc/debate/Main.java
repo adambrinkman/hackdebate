@@ -31,6 +31,13 @@ public class Main {
       res.type("text/html");
       return freeMarkerEngine.render(new ModelAndView(null, "assets/home.ftl"));
     });
+
+    get("/debate", (req, res) -> {
+      res.status(200);
+      res.type("text/html");
+      return freeMarkerEngine.render(new ModelAndView(null, "assets/debate.ftl"));
+    });
+
     get("/login", (req, res) -> {
       res.status(200);
       res.type("text/html");
