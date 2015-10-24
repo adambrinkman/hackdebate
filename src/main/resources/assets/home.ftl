@@ -14,6 +14,22 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <script src="library/socket.io.js"></script>
+    <script>
+      var socket =  io.connect('http://localhost:9092');
+      console.log("socket initilized");
+      socket.on('connect', function() {
+        console.log("Client has connected to the server!");
+      });
+
+      socket.on('chatevent', function(data) {
+        console.log("userName: " + data.userName + ", message: " + data.message);
+      });
+
+      socket.on('disconnect', function() {
+        console.log("the client has disconnected");
+      });
+    </script>
   </head>
   <body>
     <div class="container">

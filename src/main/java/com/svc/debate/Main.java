@@ -1,5 +1,6 @@
 package com.svc.debate;
 
+import com.svc.debate.service.DebateService;
 import com.svc.debate.service.MainService;
 import freemarker.cache.ClassTemplateLoader;
 import freemarker.template.Configuration;
@@ -14,6 +15,11 @@ import static spark.Spark.get;
  */
 public class Main {
   public static void main(String[] args) {
+    try {
+      DebateService.start();
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
     Spark.staticFileLocation("/assets");
     FreeMarkerEngine freeMarkerEngine = new FreeMarkerEngine();
     Configuration freeMarkerConfiguration = new Configuration();
