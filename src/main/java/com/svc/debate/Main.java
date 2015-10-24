@@ -1,6 +1,7 @@
 package com.svc.debate;
 
 import com.svc.debate.service.Authenticate;
+import com.svc.debate.service.DatabaseService;
 import com.svc.debate.service.MainService;
 import com.svc.debate.socket.DebateSocket;
 import freemarker.cache.ClassTemplateLoader;
@@ -42,7 +43,8 @@ public class Main {
       res.status(200);
       res.type("text/html");
       Authenticate authenticate = new Authenticate();
-      boolean flag = authenticate.authenticateUser(req.params("username"), req.params("password"));
+      DatabaseService db = new DatabaseService();
+      boolean flag = db.authenticateUser(req.params("username"), req.params("password"));
       if(!flag)
         return freeMarkerEngine.render(new ModelAndView(null, "assets/home.ftl"));
       else
