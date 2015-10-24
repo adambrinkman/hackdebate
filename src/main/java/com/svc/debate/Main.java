@@ -1,7 +1,7 @@
 package com.svc.debate;
 
-import com.svc.debate.service.DebateService;
 import com.svc.debate.service.MainService;
+import com.svc.debate.socket.DebateSocket;
 import freemarker.cache.ClassTemplateLoader;
 import freemarker.template.Configuration;
 import spark.ModelAndView;
@@ -9,17 +9,15 @@ import spark.Spark;
 import spark.template.freemarker.FreeMarkerEngine;
 
 import static spark.Spark.get;
+import static spark.Spark.webSocket;
 
 /**
  * Created by doyonghoon on 2015. 10. 24..
  */
 public class Main {
   public static void main(String[] args) {
-    try {
-      DebateService.start();
-    } catch (InterruptedException e) {
-      e.printStackTrace();
-    }
+    webSocket("/debatechat", DebateSocket.class);
+
     Spark.staticFileLocation("/assets");
     FreeMarkerEngine freeMarkerEngine = new FreeMarkerEngine();
     Configuration freeMarkerConfiguration = new Configuration();
