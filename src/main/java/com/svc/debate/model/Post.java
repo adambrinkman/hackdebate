@@ -1,11 +1,51 @@
 package com.svc.debate.model;
 
+import com.google.gson.annotations.SerializedName;
+import com.svc.debate.util.DataUtil;
+import java.sql.Timestamp;
+
 /**
  * Created by dsawla on 10/24/2015.
+ *
+ *
+ * postgresql://doyonghoon:password@localhost/doyonghoon
  */
 public class Post {
-    private int post_id;
-    private double time_stamp;
-    private String text;
-    private String user_id;
+    @SerializedName("post_id") private int post_id;
+    @SerializedName("user_id") private String user_id;
+    @SerializedName("time") private long time;
+    @SerializedName("timestamp") private Timestamp timestamp;
+    @SerializedName("text") private String text;
+
+    public void setTimeToTimestamp(long time) {
+        this.timestamp = new Timestamp(time);
+    }
+
+    public int getPostId() {
+        return post_id;
+    }
+
+    public long getTime() {
+        return time;
+    }
+
+    public Timestamp getTimestamp() {
+        return timestamp;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public String getUserId() {
+        return user_id;
+    }
+
+    @Override
+    public String toString() {
+        return DataUtil.getGson().toJson(this);
+    }
 }
+
+
+// post_id, time, text, user_id

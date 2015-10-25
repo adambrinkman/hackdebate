@@ -11,10 +11,15 @@ import spark.ModelAndView;
 import spark.Spark;
 import spark.template.freemarker.FreeMarkerEngine;
 
+<<<<<<< HEAD
 import java.util.ArrayList;
 import java.util.List;
 
 import static spark.Spark.*;
+=======
+import static spark.Spark.get;
+import static spark.Spark.webSocket;
+>>>>>>> origin/master
 
 /**
  * Created by doyonghoon on 2015. 10. 24..
@@ -22,7 +27,6 @@ import static spark.Spark.*;
 public class Main {
   public static void main(String[] args) {
     webSocket("/debatechat", DebateSocket.class);
-
     Spark.staticFileLocation("/assets");
     FreeMarkerEngine freeMarkerEngine = new FreeMarkerEngine();
     Configuration freeMarkerConfiguration = new Configuration();

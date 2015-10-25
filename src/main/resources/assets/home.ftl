@@ -6,8 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Nback</title>
     <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+<<<<<<< HEAD
     <link href="nback.css" rel="stylesheet">
 
+=======
+    <script src="lib/reconnecting-websocket.min.js"></script>
+>>>>>>> origin/master
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -121,6 +125,6 @@
 
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
     <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="home.js"></script>
+    <script src="lib/js/home.js"></script>
 </body>
 </html>
