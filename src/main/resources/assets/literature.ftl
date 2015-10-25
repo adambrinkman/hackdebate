@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+<!-- For data purposes: #userName for the name at the top navigation bar, #textbook for the textbook references under post topic -->
+<!-- For textbook, the classes are .txtName, .txtAuthor, .txtIsbn -->
 <html lang="en">
 
 <head>
@@ -28,10 +30,10 @@
     <![endif]-->
 
     <script type="text/javascript">
-    var PORT = "${PORT}";
-    function getPort() {
-        return PORT;
-    }
+      var PORT = "${PORT}";
+      function getPort() {
+          return PORT;
+      }
     </script>
 </head>
 
@@ -74,21 +76,20 @@
         <div id="page-wrapper">
             <div class="container-fluid">
 
-                        <!-- Heading Panel with debate topic -->
+                <!-- Heading Panel with debate topic -->
                 <div id="topicHeading" class="row">
                     <div class="col-lg-12">
                         <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <div class="row">
-                                <div class="col-sm-10">
+                            <div class="panel-heading"><div class="row">
+                                <div id="topic" class="col-sm-10">
                                     <p class="lead topicText"><strong>Topic: </strong><small><em>Does reading literature make you more moral?</em></small></p>
                                 </div>
-                                <div class="col-sm-2">
+                                <div id="endTime" class="col-sm-2">
                                     <div class="panel panel-danger text-center">
                                         <div class="panel-heading"><small><h3 class="panel-title">End Time: </h3>10/25/2015 10:00 AM</small></div>
                                     </div><!-- /.panel panel-danger text-center-->
                                 </div><!-- /.col-sm-2 -->
-                                <div id="textbook" class="col-sm-12" style="margin-top: 10px;">
+                                <div id="textbook" class="col-sm-12" style="margin-top: -5px; color: grey;">
                                     <h5>Recommended Sources:</h5>
                                     <ul>
                                         <li>
@@ -99,22 +100,21 @@
                                         </li>
                                     </ul>
                                 </div><!-- /#textbook.col-sm-12-->
-                            </div><!-- /.panel-heading -->
+                            </div></div><!-- /.panel-heading and /.row -->
                         </div><!-- /.panel panel-default -->
                     </div><!-- /.col-lg-12 -->
                 </div><!-- /#topicHeading.row -->
 
-
                 <!-- Debate post display board-->
                 <div class="row vdivide text-center">
                     <div class="col-lg-6">
-                        <h3>Pros</h3>
+                        <h3>In Favor</h3>
                         <div class="table-responsive">
                             <table id="prosColumn" class="table table-hover table-striped">
                               <thead>
                                 <tr>
-                                  <td class="debatorName">Student C's Name</td>
-                                  <td class="debatorArg">Student C's argument</td>
+                                  <th class="debatorName">Name</th>
+                                  <th class="debatorArg">Argument</th>
                                 </tr>
                               </thead>
                               <tbody id="prosColumnBody">
@@ -123,13 +123,13 @@
                         </div><!-- /.table-responsive -->
                     </div><!-- /#prosColumn.col-lg-6 -->
                     <div class="col-lg-6">
-                        <h3>Cons</h3>
+                        <h3>Against</h3>
                         <div class="table-responsive">
                             <table id="consColumn" class="table table-hover table-striped">
                               <thead>
                                 <tr>
-                                  <td class="debatorName">Student C's Name</td>
-                                  <td class="debatorArg">Student C's argument</td>
+                                  <td class="debatorName">Name</td>
+                                  <td class="debatorArg">Argument</td>
                                 </tr>
                               </thead>
                               <tbody id="consColumnBody">
@@ -139,7 +139,7 @@
                     </div><!-- /.#consColumn.col-lg-6 -->
                 </div>
                 <!-- /.row -->
-                <div class="row">
+                <div class="col-lg-12">
                   <div class="input-group">
                     <input type="text" class="form-control" id="debate-text" placeholder="Enter your opinion" />
                     <span class="input-group-btn">

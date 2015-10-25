@@ -3869,11 +3869,9 @@ tbody.collapse.in {
   pointer-events: none;
 }
 .input-group {
-  position: relative;
+  bottom: 0;
   display: table;
   border-collapse: separate;
-  margin: 15px;
-  padding: 15px;
 }
 .input-group[class*="col-"] {
   float: none;
@@ -6812,17 +6810,14 @@ button.close {
   }
 }
 /*# sourceMappingURL=bootstrap.css.map */
-#classSelection {
-  width: 80%;
-  margin: auto;
-}
+
 
 @media (min-width: 1200px) {
   .row.vdivide [class*='col-']:not(:last-child):after {
     background: gray;
     width: 2px;
     content: "";
-    display:block;
+    display: block;
     position: absolute;
     top:0;
     bottom: 0;
@@ -6835,8 +6830,19 @@ button.close {
 .debatorName {
   width: 25%;
 }
-
-.prosCons {
-  margin-left: 15px;
-  margin-right: 15px;
+#topic #endTime {
+  margin-bottom: 0;
+}
+#wrapper {
+  height: 100%;
+}
+#page-wrapper {
+  height:100%;
+}
+@media (min-width: 768px) {
+  #wrapper {
+    bottom:0;
+    padding-top: 52px;
+    height: 100%;
+  }
 }

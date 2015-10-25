@@ -1,7 +1,6 @@
+<!DOCTYPE html>
 <!-- For data purposes: #userName for the name at the top navigation bar, #textbook for the textbook references under post topic -->
 <!-- For textbook, the classes are .txtName, .txtAuthor, .txtIsbn -->
-
-<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -77,21 +76,20 @@
         <div id="page-wrapper">
             <div class="container-fluid">
 
-                        <!-- Heading Panel with debate topic -->
+                <!-- Heading Panel with debate topic -->
                 <div id="topicHeading" class="row">
                     <div class="col-lg-12">
                         <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <div class="row">
-                                <div class="col-sm-10">
+                            <div class="panel-heading"><div class="row">
+                                <div id="topic" class="col-sm-10">
                                     <p class="lead topicText"><strong>Topic: </strong><small><em>Should there be more strict regulation of antibiotics/ should patients look elsewhere like herbals, diet, lifestyle for treatments?</em></small></p>
-                                </div>
-                                <div class="col-sm-2">
+                                </div><!-- /#topic.col-sm-10 for Topic-->
+                                <div id="endTime" class="col-sm-2">
                                     <div class="panel panel-danger text-center">
                                         <div class="panel-heading"><small><h3 class="panel-title">End Time: </h3>10/25/2015 10:00 AM</small></div>
                                     </div><!-- /.panel panel-danger text-center-->
-                                </div><!-- /.col-sm-2 -->
-                                <div id="textbook" class="col-sm-12" style="margin-top: 10px;">
+                                </div><!-- /#endTime.col-sm-2 -->
+                                <div id="textbook" class="col-sm-12" style="margin-top: -5px; color: grey;">
                                     <h5>Recommended Sources:</h5>
                                     <ul>
                                         <li>
@@ -102,11 +100,10 @@
                                         </li>
                                     </ul>
                                 </div><!-- /#textbook.col-sm-12-->
-                            </div><!-- /.panel-heading -->
+                            </div></div><!-- /.panel-heading and /.row -->
                         </div><!-- /.panel panel-default -->
                     </div><!-- /.col-lg-12 -->
                 </div><!-- /#topicHeading.row -->
-
 
                 <!-- Debate post display board-->
                 <div class="row vdivide text-center">
@@ -142,6 +139,8 @@
                     </div><!-- /.#consColumn.col-lg-6 -->
                 </div>
                 <!-- /.row -->
+                            </div>
+            <!-- /.container-fluid -->
                 <div class="col-lg-12">
                   <div class="input-group">
                     <input type="text" class="form-control" id="debate-text" placeholder="Enter your opinion" />
@@ -149,10 +148,8 @@
                         <button class="btn btn-default" type="button" id="send-post">SEND</button>
                     </span>
                   </div>
-                </div><!-- /.row-->
-                </div><!-- /.row vdivide-->
-            </div>
-            <!-- /.container-fluid -->
+                </div><!-- /.col-lg-12-->
+
 
         </div>
         <!-- /#page-wrapper -->
