@@ -196,24 +196,24 @@
                             <div class="panel-heading">
                                 <div class="row">
                                     <div class="col-sm-12">
-                                        <form class="col-md-12" method="post" action="/insertPost">
+                                        <form class="col-md-12" method="post" action="/insertTopic">
                                             <div class="form-group">
                                                 <strong>Create a new Post:</strong>
                                             </div>
                                             <div class="form-group">
-                                                <input type="text" class="form-control input-lg" name="post" />
+                                                <input type="text" class="form-control input-lg" name="topic" required />
                                             </div>
                                             <div class="form-group">
-                                                <input type="datetime-local" class="form-control" name="begindate"/>
+                                                <input type="datetime-local" class="form-control" name="begindate" required/>
                                             </div>
                                             <div class="form-group">
-                                                <input type="datetime-local" class="form-control" name="enddate" />
+                                                <input type="datetime-local" class="form-control" name="enddate" required/>
                                             </div>
                                             <div class="form-group">
                                                 <strong>Want to provide a reference? (Optional)</strong>
                                             </div>
                                             <div class="form-group">
-                                                <form action="/searchBooks" method="get">
+                                                <form action="/searchBooks" method="post">
                                                     <input list="books" name="book">
                                                     <datalist id="books">
                                                         <option value="Java 6">
@@ -222,7 +222,7 @@
                                                         <option value="C">
                                                         <option value="C#">
                                                     </datalist>
-                                                    <input type="submit" value="Submit Book">
+                                                    <input type="submit" value="Search Book">
                                                 </form>
                                             </div>
                                             <div class="form-group">

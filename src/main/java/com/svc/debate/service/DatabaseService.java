@@ -69,6 +69,24 @@ public class DatabaseService {
     return list;
   }
 
+  public static boolean insertTopic(String text, Timestamp begintime, Timestamp endtime, int userId) {
+    try {
+      PreparedStatement s = getConnection().prepareCall("INSERT INTO debate (course_id, user_id, start_time, end_time, topic) VALUES (?, ?, ?, ?, ?, ?)");
+      s.setInt(1, 1);
+      s.setInt(2, userId);
+      s.setTimestamp(3, begintime);
+      s.setTimestamp(4, endtime);
+      s.setString(5, text);
+
+      int result = s.executeUpdate();
+      return result > 0;
+    }
+    catch(Exception e) {
+      System.out.println(e.toString());
+    }
+    return false;
+  }
+
   public boolean insertPost(String text, Timestamp time, int userId) {
     try {
       PreparedStatement s = getConnection().prepareCall("INSERT INTO post (user_id, time, opinion) VALUES (?, ?, ?)");
