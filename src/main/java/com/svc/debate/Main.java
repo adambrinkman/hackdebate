@@ -7,8 +7,6 @@ import com.svc.debate.socket.DebateSocket;
 import com.svc.debate.util.WLog;
 import freemarker.cache.ClassTemplateLoader;
 import freemarker.template.Configuration;
-
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -27,6 +25,7 @@ import static spark.Spark.webSocket;
  */
 public class Main {
   public static void main(String[] args) {
+    DatabaseService.getInstance();
     webSocket("/debatechat", DebateSocket.class);
     Spark.staticFileLocation("/assets");
     FreeMarkerEngine freeMarkerEngine = new FreeMarkerEngine();
@@ -50,35 +49,24 @@ public class Main {
     get("/debate", (req, res) -> {
       res.status(200);
       res.type("text/html");
-      Map<String, Object> m = createCommonMap();
-      if (hasCookie(req)) {
-        Users u =DatabaseService.getUser(NumberUtils.toInt(req.cookie("userId")));
-        WLog.i("userName: " + u.getUserName());
-        m.put("userId", req.cookie("userId"));
-        m.put("userName", u.getUserName());
-        m.put("userRole", u.getRole().name().toLowerCase());
-        return freeMarkerEngine.render(new ModelAndView(m, "assets/debate.ftl"));
-      } else {
-        return freeMarkerEngine.render(new ModelAndView(null, "assets/home.ftl"));
-      }
+      return routeToDebate(freeMarkerEngine, req);
     });
 
     post("/searchBooks", (req, res) -> {
       res.status(200);
       res.type("text/html");
-      System.out.println("Books: "+ req.queryMap("books").value());
-      return freeMarkerEngine.render(new ModelAndView(createCommonMap(), "assets/debate.ftl"));
+      return routeToDebate(freeMarkerEngine, req);
     });
 
     post("/insertTopic", (req, res) -> {
       res.status(200);
       res.type("text/html");
-      System.out.println("Books: "+ req.queryMap("books").value());
-      System.out.println("Cookie: "+ req.cookie("userId"));
+      System.out.println("Books: " + req.queryMap("books").value());
+      System.out.println("Cookie: " + req.cookie("userId"));
       int user_id = Integer.parseInt(req.cookie("userId"));
-     // Timestamp begintime = new Timestamp(String.valueOf(req.queryMap("begindate").value()));
+      // Timestamp begintime = new Timestamp(String.valueOf(req.queryMap("begindate").value()));
       //Timestamp begintime =  Timestamp.from (req.queryMap("begindate").value());
-     // boolean flag = DatabaseService.insertTopic(req.queryMap("topic").value(), req.queryMap("begindate").value(), req.queryMap("enddate").value(), user_id);
+      // boolean flag = DatabaseService.insertTopic(req.queryMap("topic").value(), req.queryMap("begindate").value(), req.queryMap("enddate").value(), user_id);
       return freeMarkerEngine.render(new ModelAndView(null, "assets/Professor.ftl"));
     });
 
@@ -90,18 +78,34 @@ public class Main {
       list = DatabaseService.authenticateValidUser(req.queryMap("login_email").value(), req.queryMap("login_password").value());
       System.out.println("list: " + !list.isEmpty());
 
-      if (list.isEmpty())
+      if (list.isEmpty()) {
         return freeMarkerEngine.render(new ModelAndView(null, "assets/home.ftl"));
-      else {
+      } else {
         res.cookie("userId", list.get(0));
         res.cookie("role", list.get(1));
         System.out.println("Cookie: " + list.get(0) +", " + list.get(1));
-        if(list.get(1).equalsIgnoreCase("Professor"))
+        if(list.get(1).equalsIgnoreCase("Professor")) {
           return freeMarkerEngine.render(new ModelAndView(createCommonMap(), "assets/Professor.ftl"));
-        else
-          return freeMarkerEngine.render(new ModelAndView(createCommonMap(), "assets/debate.ftl"));
+        } else {
+          res.redirect("/debate", 301);
+//          return routeToDebate(freeMarkerEngine, req);
+          return null;
+        }
       }
     });
+  }
+
+  private static String routeToDebate(FreeMarkerEngine freeMarkerEngine, spark.Request req) {
+    Map<String, Object> m = createCommonMap();
+    if (hasCookie(req)) {
+      Users u = DatabaseService.getUser(NumberUtils.toInt(req.cookie("userId")));
+      m.put("userId", req.cookie("userId"));
+      m.put("userName", !StringUtils.isEmpty(u.getUserName()) ? u.getUserName() : "");
+      m.put("userRole", u.getRole() != null ? u.getRole().name().toLowerCase() : "");
+      return freeMarkerEngine.render(new ModelAndView(m, "assets/debate.ftl"));
+    } else {
+      return freeMarkerEngine.render(new ModelAndView(null, "assets/home.ftl"));
+    }
   }
 
   private static Map<String, Object> createCommonMap() {
