@@ -1,7 +1,5 @@
 package com.svc.debate;
 
-import com.svc.debate.model.Users;
-import com.svc.debate.service.Authenticate;
 import com.svc.debate.service.DatabaseService;
 import com.svc.debate.service.MainService;
 import com.svc.debate.socket.DebateSocket;
@@ -11,15 +9,9 @@ import spark.ModelAndView;
 import spark.Spark;
 import spark.template.freemarker.FreeMarkerEngine;
 
-<<<<<<< HEAD
-import java.util.ArrayList;
-import java.util.List;
-
-import static spark.Spark.*;
-=======
 import static spark.Spark.get;
+import static spark.Spark.post;
 import static spark.Spark.webSocket;
->>>>>>> origin/master
 
 /**
  * Created by doyonghoon on 2015. 10. 24..
@@ -59,17 +51,5 @@ public class Main {
       else
         return freeMarkerEngine.render(new ModelAndView(null, "assets/debate.ftl"));
     });
-
-    /*get("/login", (req, res) -> {
-      res.status(200);
-      res.type("text/html");
-      Authenticate authenticate = new Authenticate();
-      DatabaseService db = new DatabaseService();
-      boolean flag = db.authenticateUser(req.params("username"), req.params("password"));
-      if (!flag)
-        return freeMarkerEngine.render(new ModelAndView(null, "assets/home.ftl"));
-      else
-        return freeMarkerEngine.render(new ModelAndView(null, "assets/debate.ftl"));
-    });*/
   }
 }

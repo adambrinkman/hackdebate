@@ -20,8 +20,8 @@ public class SocketServer {
     public String handleMessage (String message) {
         JsonObject result = new JsonObject();
         Post post = parsePostFromJson(message);
-        UUID postId = attemptPost(post);
-            if (postId == null) {
+        boolean hasPosted = attemptPost(post);
+            if (hasPosted) {
               result.addProperty("status", 500);
               result.addProperty("message", "Failed to post message to the database");
             } else {
@@ -31,8 +31,10 @@ public class SocketServer {
         return result.toString();
     }
 
-    private UUID attemptPost(Post post) {
+    private boolean attemptPost(Post post) {
         WLog.i("post: " + post);
         return DatabaseService.getInstance().insertPost(post.getText(), post.getTimestamp(), post.getUserId());
     }
+
+
 }
