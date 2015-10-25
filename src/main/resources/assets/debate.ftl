@@ -198,8 +198,8 @@
                             <table id="prosColumn" class="table table-hover table-striped">
                               <thead>
                                 <tr>
-                                  <td class="debatorName">Student C's Name</td>
-                                  <td class="debatorArg">Student C's argument</td>
+                                  <th class="debatorName">Student C's Name</th>
+                                  <th class="debatorArg">Student C's argument</th>
                                 </tr>
                               </thead>
                               <tbody id="prosColumnBody">

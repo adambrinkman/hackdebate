@@ -1,7 +1,6 @@
 var post;
 $(document).ready(function() {
-	// var socket = new ReconnectingWebSocket("ws://localhost:" + getPort() + "/debatechat");
-	var socket = new ReconnectingWebSocket();
+	var socket = new ReconnectingWebSocket("ws://localhost:" + getPort() + "/debatechat");
   socket.debug = true;
   socket.timeoutInterval = 5400;
 
@@ -30,12 +29,11 @@ function createPost(userId, timestamp, text) {
 
 function addOpinionColumn(p) {
 	console.log("text: " + p.text);
-	var column = $('#prosColumnBody');
+	var column = $('tbody#prosColumnBody');
 	var textElement = $('<td></td>').text(p.text);
 	var nameElement = $('<td></td>').text(p.user_id);
-	var row = $('<tr>/<tr>');
+	var row = $('<tr></tr>');
 	row.append(nameElement);
 	row.append(textElement);
 	column.append(row);
-	console.log("added!");
 }
