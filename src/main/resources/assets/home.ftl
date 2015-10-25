@@ -24,7 +24,7 @@
         <form role="form">
             <div class="panel">
                 <div class="panel-body">
-                    <label class="radio-inline" "><!-- style=" width 200px; height 100px;" -->
+                    <label class="radio-inline">
                         <input type="radio" name="optradio">
                         College Student
                     </label>
