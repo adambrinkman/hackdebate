@@ -4270,7 +4270,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .navbar-fixed-bottom .navbar-collapse {
   max-height: 340px;
 }
-@media (max-device-width: 240px) and (orientation: landscape) {
+@media (max-device-width: 480px) and (orientation: landscape) {
   .navbar-fixed-top .navbar-collapse,
   .navbar-fixed-bottom .navbar-collapse {
     max-height: 200px;
@@ -6807,17 +6807,19 @@ button.close {
   margin: auto;
 }
 
-.row.vdivide [class*='col-']:not(:last-child):after {
-  background: gray;
-  width: 2px;
-  content: "";
-  display:block;
-  position: absolute;
-  top:0;
-  bottom: 0;
-  right: 0;
-  min-height: 10px;
-  margin-bottom: 10px;
+@media (min-width: 1200px) {
+  .row.vdivide [class*='col-']:not(:last-child):after {
+    background: gray;
+    width: 2px;
+    content: "";
+    display:block;
+    position: absolute;
+    top:0;
+    bottom: 0;
+    right: 0;
+    min-height: 10px;
+    margin-bottom: 10px;
+  }
 }
 
 .debatorName {
