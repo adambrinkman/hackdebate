@@ -13,21 +13,23 @@
     <!--<script src="switchPanel.js"></script>-->
 
     <script>
-
+    /*
         $(document).ready(function(){
                 $("#two").hide();
         });
-
         $(document).ready(function(){
             $("#radio1").click(function(){
-                 $("#two").hide();
-                 $("#one").show();
+                 //$("#two").hide();
+                 //$("#one").show();
+                 $("#panel_heading").text("Student Login");
             });
             $("#radio2").click(function(){
-                $("#one").hide();
-                $("#two").show();
+               // $("#one").hide();
+                //$("#two").show();
+                $("#panel_heading").text("Professor Login");
             });
         });
+        */
     </script>
 </head>
 <body>
@@ -38,11 +40,11 @@
                 <span class="lead text-right" style="color:gray;"><em>Interactive-Based Learning</em><span>
             </h1>
         </div>
-        
+        <!--
         <form role="form">
             <div class="panel text-center">
                 <div class="panel-body center-block">
-                    <label class="radio-inline"><!-- style=" width 200px; height 100px;" -->
+                    <label class="radio-inline">
                         <input type="radio" name="optradio" id="radio1" checked>Student
                     </label>
                     <label class="radio-inline">
@@ -51,17 +53,17 @@
                 </div>
             </div>
         </form>
-
+        -->
         <!-- Simple Student Login - START -->
         <div class="panel panel-success center-block" style="width: 50%" id="one">
-            <div class="panel-heading">Student Login</div>
+            <div class="panel-heading" id="panel_heading">Login</div>
             <div class="panel-body">
                 <form class="col-md-12" method="post" action="/login">
                     <div class="form-group">
-                        <input type="email" class="form-control input-lg" placeholder="Email" name="cs_login_email" required>
+                        <input type="email" class="form-control input-lg" placeholder="Email" name="login_email" required>
                     </div>
                     <div class="form-group">
-                        <input type="password" class="form-control input-lg" placeholder="Password" name="cs_login_password" required>
+                        <input type="password" class="form-control input-lg" placeholder="Password" name="login_password" required>
                     </div>
                     <div class="form-group">
                         <input type="submit" class="btn btn-primary btn-lg btn-block" />Sign In
@@ -72,7 +74,10 @@
             </div>
         </div>
         <!-- Simple College Student Login - END -->
+
         <!-- Simple Professor Login - START -->
+
+        <!--
         <div class="panel panel-success center-block" style="width: 50%" id="two">
             <div class="panel-heading">Professor Login</div>
             <div class="panel-body">
@@ -91,7 +96,9 @@
                 </form>
             </div>
         </div>
+        -->
         <!-- Simple High School Student Login - END -->
+
 
 <!-- In Progres Coding. Hidden for now. Simple High School Student Registration - START
         <div class="panel panel-success" style="width: 50%">

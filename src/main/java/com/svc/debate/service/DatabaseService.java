@@ -6,9 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
-
-/*import org.sql2o.*;
-import org.sql2o.Connection;*/
+import java.util.ArrayList;
 
 /**
  * Created by dsawla on 10/24/2015.
@@ -47,19 +45,28 @@ public class DatabaseService {
     return mPostgresDatabaseConnection;
   }
 
-  public static boolean isAuthenticatedUser(String username, String password) {
+  public static ArrayList<String> authenticateValidUser(String email, String password) {
     boolean flag = true;
-    try {
-      Class.forName("org.postgresql.Driver");
-      Statement stmt = getConnection().createStatement();
-      String query = "select user_id, password from users where sid = '" + username + "' and password = '" + password + "';";
-      System.out.println(query);
-      ResultSet rs = stmt.executeQuery(query);
-      flag = rs.next();
+    System.out.println("authenticateValidUser");
+      ArrayList<String> list = new ArrayList<String>();
+      list.clear();
+      ResultSet rs = null;
+      try {
+          Class.forName("org.postgresql.Driver");
+          Statement stmt = getConnection().createStatement();
+          String query = "select user_id, password, role from \"Users\" where email = '" + email + "' and password = '" + password + "';";
+          System.out.println(query);
+          rs = stmt.executeQuery(query);
+
+          while (rs.next()) {
+              System.out.println(String.valueOf(rs.getInt("user_id")) + String.valueOf(rs.getString("role")));
+            list.add(String.valueOf(rs.getInt("user_id")));
+            list.add(String.valueOf(rs.getString("role")));
+          }
     } catch (Exception e) {
       System.out.println(e.toString());
     }
-    return flag;
+    return list;
   }
 
   public boolean insertPost(String text, Timestamp time, int userId) {

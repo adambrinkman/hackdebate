@@ -3,9 +3,9 @@ package com.svc.debate;
 import com.svc.debate.service.DatabaseService;
 import com.svc.debate.service.MainService;
 import com.svc.debate.socket.DebateSocket;
-import com.svc.debate.util.WLog;
 import freemarker.cache.ClassTemplateLoader;
 import freemarker.template.Configuration;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import spark.ModelAndView;
@@ -44,12 +44,21 @@ public class Main {
     post("/login", (req, res) -> {
       res.status(200);
       res.type("text/html");
-      boolean flag = DatabaseService.isAuthenticatedUser(req.queryMap("cs_login_sid").value(), req.queryMap("cs_login_password").value());
-      System.out.println("flag: " + flag);
-      if (!flag)
-        return freeMarkerEngine.render(new ModelAndView(createCommonMap(), "assets/home.ftl"));
-      else
-        return freeMarkerEngine.render(new ModelAndView(createCommonMap(), "assets/debate.ftl"));
+      ArrayList<String> list = new ArrayList<>();
+      list = DatabaseService.authenticateValidUser(req.queryMap("login_email").value(), req.queryMap("login_password").value());
+      System.out.println("list: "+ !list.isEmpty());
+
+      if (list.isEmpty())
+        return freeMarkerEngine.render(new ModelAndView(null, "assets/home.ftl"));
+      else {
+        res.cookie("userId", list.get(0));
+        res.cookie("role", list.get(1));
+        System.out.println("Cookie: " + list.get(0) +", " + list.get(1));
+        if(list.get(1).equalsIgnoreCase("Professor"))
+          return freeMarkerEngine.render(new ModelAndView(createCommonMap(), "assets/Professor.ftl"));
+        else
+          return freeMarkerEngine.render(new ModelAndView(createCommonMap(), "assets/debate.ftl"));
+      }
     });
   }
 
