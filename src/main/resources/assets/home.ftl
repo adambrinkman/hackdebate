@@ -20,6 +20,20 @@
         <div class="page-header">
             <h1>Welcome!</h1>
         </div>
+        
+        <form role="form">
+            <div class="panel">
+                <div class="panel-body">
+                    <label class="radio-inline" "><!-- style=" width 200px; height 100px;" -->
+                        <input type="radio" name="optradio">
+                        College Student
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="optradio">High School Student
+                    </label>
+                </div>
+            </div>
+        </form>
 
         <!-- Simple College Student Login - START -->
         <div class="panel panel-success" style="width: 50%">
