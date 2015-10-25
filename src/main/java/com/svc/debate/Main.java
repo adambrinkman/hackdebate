@@ -50,6 +50,18 @@ public class Main {
       }
     });
 
+      get("/professor", (req, res) -> {
+          res.status(200);
+          res.type("text/html");
+          if (!hasCookie(req)) {
+              return freeMarkerEngine.render(new ModelAndView(createCommonMap(), "assets/home.ftl"));
+          } else {
+              res.redirect("/professor", 301);
+              res.status(200);
+              return null;
+          }
+      });
+
     get("/debate", (req, res) -> {
       res.status(200);
       res.type("text/html");
