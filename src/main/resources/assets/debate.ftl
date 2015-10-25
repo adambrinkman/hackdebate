@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>HackDebate Board</title>
+    <title>HackDebate: Debate Board of John Smith</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
@@ -43,7 +43,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">John's Debate Board</a>
+                <a class="navbar-brand" href="index.html">John's Board</a>
             </div>
             <!-- Top Menu Items -->
             <ul class="nav navbar-right top-nav">
@@ -164,28 +164,16 @@
         </nav>
 
         <div id="page-wrapper">
-
             <div class="container-fluid">
-
-                <!-- Page Heading -->
-                <div class="row">
-                    <div class="col-lg-12">
-                        <h1 class="page-header">
-                            Biology
-                        </h1>
-                    </div>
-                </div>
-                <!-- /.row -->
 
                 <!-- Heading Panel with debate topic -->
                 <div id="topicHeading" class="row">
                     <div class="col-lg-12">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <h2>Topic:</h2>
-                                <p class="lead"><em>Should there be more strict regulation of antibiotics/ should patients look elsewhere like herbals, diet, lifestyle for treatments?</em></p>
+                                <p class="lead"><strong>Topic: </strong><small><em>Should there be more strict regulation of antibiotics/ should patients look elsewhere like herbals, diet, lifestyle for treatments?</em></p></small>
                                 <div class="row">
-                                    <div class="col-lg-3 pull-right"><div class="panel panel-danger">
+                                    <div class="col-lg-3 pull-right"><div class="panel panel-danger text-center">
                                         <div class="panel-heading"><h3 class="panel-title">End Time: </h3>10/25/2015 10:00 AM</div>
                                     </div></div><!-- /.col-sm-3 and /.panel-->
                                 </div><!-- /.row -->
