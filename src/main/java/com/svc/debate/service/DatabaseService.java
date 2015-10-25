@@ -28,6 +28,7 @@ public class DatabaseService {
       createCourseTableIfNotExists();
       createDebateTableIfNotExists();
       createPostTableIfNotExists();
+      createBookTableIfNotExists();
     }
     return singleton;
   }
@@ -81,6 +82,28 @@ public class DatabaseService {
       s.setTimestamp(2, p.getTimestamp());
       s.setString(3, p.getOpiniton());
       s.setString(4, p.getSide().name().toLowerCase());
+      int result = s.executeUpdate();
+      return result > 0;
+    }
+    catch(Exception e) {
+      System.out.println(e.toString());
+    }
+    return false;
+  }
+
+  public boolean insertDebate(Debate d) {
+    try {
+      PreparedStatement s = getConnection().prepareCall("INSERT INTO debate " +
+          "(course_id, user_id, start_time, end_time, topic, book_title, book_author, book_isbn) " +
+          "VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+      s.setInt(1, d.getCourseId());
+      s.setInt(2, d.getUserId());
+      s.setTimestamp(3, d.getStartTime());
+      s.setTimestamp(4, d.getEndTime());
+      s.setString(5, d.getTopic());
+      s.setString(6, d.getBookTitle());
+      s.setString(6, d.getBookAuthor());
+      s.setString(7, d.getBookIsbn());
       int result = s.executeUpdate();
       return result > 0;
     }
@@ -163,6 +186,9 @@ public class DatabaseService {
         d.setUserId(rs.getInt("user_id"));
         d.setEndTime(rs.getTimestamp("end_time"));
         d.setStartTime(rs.getTimestamp("start_time"));
+        d.setBookTitle(rs.getString("book_title"));
+        d.setBookAuthor(rs.getString("book_author"));
+        d.setBookIsbn(rs.getString("book_isbn"));
         debates.add(d);
       }
     } catch(Exception e) {
@@ -174,7 +200,7 @@ public class DatabaseService {
   private static void createUserTableIfNotExists() {
     try {
       Statement stmt = getConnection().createStatement();
-        stmt.executeUpdate("CREATE TABLE IF NOT EXISTS users (user_id SERIAL PRIMARY KEY, email TEXT, user_name TEXT, password TEXT, role TEXT)");
+      stmt.executeUpdate("CREATE TABLE IF NOT EXISTS users (user_id SERIAL PRIMARY KEY, email TEXT, user_name TEXT, password TEXT, role TEXT)");
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -192,7 +218,7 @@ public class DatabaseService {
   private static void createDebateTableIfNotExists() {
     try {
       Statement stmt = getConnection().createStatement();
-      stmt.executeUpdate("CREATE TABLE IF NOT EXISTS debate (debate_id SERIAL PRIMARY KEY, course_id INT, user_id INT, start_time TIMESTAMP, end_time TIMESTAMP, topic TEXT)");
+      stmt.executeUpdate("CREATE TABLE IF NOT EXISTS debate (debate_id SERIAL PRIMARY KEY, course_id INT, user_id INT, start_time TIMESTAMP, end_time TIMESTAMP, topic TEXT, book_title TEXT, book_isbn TEXT, book_author TEXT)");
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -202,6 +228,15 @@ public class DatabaseService {
     try {
       Statement stmt = getConnection().createStatement();
       stmt.executeUpdate("CREATE TABLE IF NOT EXISTS course " + "(course_id SERIAL PRIMARY KEY, user_id INT, name TEXT)");
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
+
+  private static void createBookTableIfNotExists() {
+    try {
+      Statement stmt = getConnection().createStatement();
+      stmt.executeUpdate("CREATE TABLE IF NOT EXISTS book " + "(book_id SERIAL PRIMARY KEY, title TEXT, isbn TEXT, author TEXT)");
     } catch (Exception e) {
       e.printStackTrace();
     }

@@ -15,6 +15,34 @@ public class Debate {
   @SerializedName("start_time") private Timestamp startTime;
   @SerializedName("end_time") private Timestamp endTime;
 
+  @SerializedName("book_title") private String bookTitle;
+  @SerializedName("book_isbn") private String bookIsbn;
+  @SerializedName("book_author") private String bookAuthor;
+
+  public String getBookAuthor() {
+    return bookAuthor;
+  }
+
+  public void setBookAuthor(String bookAuthor) {
+    this.bookAuthor = bookAuthor;
+  }
+
+  public String getBookIsbn() {
+    return bookIsbn;
+  }
+
+  public void setBookIsbn(String bookIsbn) {
+    this.bookIsbn = bookIsbn;
+  }
+
+  public String getBookTitle() {
+    return bookTitle;
+  }
+
+  public void setBookTitle(String bookTitle) {
+    this.bookTitle = bookTitle;
+  }
+
   public Timestamp getEndTime() {
     return endTime;
   }
