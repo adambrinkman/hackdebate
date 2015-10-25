@@ -50,11 +50,11 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">John's Board</a>
+                <a class="navbar-brand" href="index.html">${userName}'s Board</a>
             </div>
             <!-- Top Menu Items -->
             <ul class="nav navbar-right top-nav">
-                <li id="userName" class="navbar-brand"><small><i class="fa fa-user"></i> John Smith</small></li>
+                <li id="userName" class="navbar-brand"><small><i class="fa fa-user"></i>${userName}</small></li>
             </ul><!-- /.nav navbar-right top-nav-->
             <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
             <div class="collapse navbar-collapse navbar-ex1-collapse">

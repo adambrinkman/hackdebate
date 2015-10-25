@@ -3,6 +3,8 @@ package com.svc.debate.service;
 import com.svc.debate.model.Course;
 import com.svc.debate.model.Debate;
 import com.svc.debate.model.Post;
+import com.svc.debate.model.TypeUser;
+import com.svc.debate.model.Users;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -86,6 +88,26 @@ public class DatabaseService {
       System.out.println(e.toString());
     }
     return false;
+  }
+
+  public static Users getUser(int userId) {
+    Users u = new Users();
+    try {
+      PreparedStatement s = getConnection().prepareCall("SELECT * FROM users WHERE user_id = ?");
+      s.setInt(1, userId);
+      ResultSet rs = s.executeQuery();
+      if (rs.next()) {
+        u.setEmail(rs.getString("email"));
+        u.setId(rs.getInt("user_id"));
+        u.setRole(TypeUser.getUserType(rs.getString("role")));
+        u.setUserName(rs.getString("user_name"));
+        return u;
+      }
+    }
+    catch(Exception e) {
+      System.out.println(e.toString());
+    }
+    return u;
   }
 
   public static List<Post> getPost(int debateId) {

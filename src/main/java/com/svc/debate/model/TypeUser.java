@@ -7,5 +7,9 @@ import com.google.gson.annotations.SerializedName;
  */
 public enum TypeUser {
   @SerializedName("professor") PROFESSOR,
-  @SerializedName("student") STUDENT
+  @SerializedName("student") STUDENT;
+
+  public static TypeUser getUserType(String t) {
+    return t.equals("professor") ? PROFESSOR : STUDENT;
+  }
 }

@@ -1,5 +1,6 @@
 package com.svc.debate;
 
+import com.svc.debate.model.Users;
 import com.svc.debate.service.DatabaseService;
 import com.svc.debate.service.MainService;
 import com.svc.debate.socket.DebateSocket;
@@ -10,6 +11,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.math.NumberUtils;
 import spark.ModelAndView;
 import spark.Spark;
 import spark.template.freemarker.FreeMarkerEngine;
@@ -47,9 +49,13 @@ public class Main {
       res.status(200);
       res.type("text/html");
       Map<String, Object> m = createCommonMap();
-//      if (hasCookie(req)) {
-//        m.put("userId", req.cookie("userId"));
-//      }
+      if (hasCookie(req)) {
+        Users u =DatabaseService.getUser(NumberUtils.toInt(req.cookie("userId")));
+        WLog.i("userName: " + u.getUserName());
+        m.put("userId", req.cookie("userId"));
+        m.put("userName", u.getUserName());
+        m.put("userRole", u.getRole().name().toLowerCase());
+      }
       return freeMarkerEngine.render(new ModelAndView(m, "assets/debate.ftl"));
     });
 
