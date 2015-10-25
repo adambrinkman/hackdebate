@@ -20,24 +20,6 @@
     <!-- Custom Fonts -->
     <link href="lib/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <script src="lib/js/reconnecting-websocket.min.js"></script>
-    
-    <script>
-        function fetchData(str) {
-            var xhttp;
-            if (str.length == 0) {
-                document.getElementById("txtHint").innerHTML = "";
-                return;
-            }
-            xhttp = new XMLHttpRequest();
-            xhttp.onreadystatechange = function () {
-                if (xhttp.readyState == 4 && xhttp.status == 200) {
-                    document.getElementById("books").innerHTML = xhttp.responseText;
-                }
-            }
-            xhttp.open("GET", "gethint.php?q=" + str, true);
-            xhttp.send();
-        }
-    </script>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -213,8 +195,7 @@
                                                 <strong>Want to provide a reference? (Optional)</strong>
                                             </div>
                                             <div class="form-group">
-                                                <form action="/searchBooks" method="post">
-                                                    <input list="books" name="book">
+                                                    <input list="books" name="book" >
                                                     <datalist id="books">
                                                         <option value="Java 6">
                                                         <option value="Java 8">
@@ -222,7 +203,6 @@
                                                         <option value="C">
                                                         <option value="C#">
                                                     </datalist>
-                                                    <input type="submit" value="Search Book">
                                                 </form>
                                             </div>
                                             <div class="form-group">
@@ -271,6 +251,22 @@
     <!-- Bootstrap Core JavaScript -->
     <script src="bower_components/bootstrap/js/bootstrap.min.js"></script>
     <script src="lib/js/debate.js"></script>
+
+    <script>
+        $( "input[name='book']" ).keyup(function() {
+            var value = $( "input[name='book']" ).val();
+            console.log( value );
+
+            $.ajax({
+              url: '/books',
+              type: "GET",
+              data: value,
+              success: function (data) {
+                 console.log(data);
+              }
+            });
+        });
+    </script>
 </body>
 
 </html>
