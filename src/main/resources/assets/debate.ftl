@@ -220,16 +220,15 @@
                     </div><!-- /.#consColumn.col-lg-6 -->
                 </div>
                 <!-- /.row -->
-                </div><!-- /.row vdivide-->
-                <div class="col-lg-6 center-block text-center" style="float:none">
-                    <form class="form-inline">
-                        <div class="form-group">
-                            <label class="sr-only" for="argumentInput">Opinion</label>
-                            <input type="text" class="form-control" id="debate-text" placeholder="Enter your opinion">
-                        </div>
-                        <button type="submit" class="btn btn-default" id="send-post">SEND</button>
-                    </form>
+                <div class="row">
+                  <div class="input-group">
+                    <input type="text" class="form-control" id="debate-text" placeholder="Enter your opinion" />
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="button" id="send-post">SEND</button>
+                    </span>
+                  </div>
                 </div><!-- /.row-->
+                </div><!-- /.row vdivide-->
             </div>
             <!-- /.container-fluid -->
 
