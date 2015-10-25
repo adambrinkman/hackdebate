@@ -1,17 +1,19 @@
 package com.svc.debate.model;
 
+import lombok.Data;
+
 /**
  * Created by dsawla on 10/24/2015.
  */
 
-//@Data
+@Data
 public class Users {
-    private int user_id;
-    private String sid;
-    private String email;
-    private String username;
-    private String first_name;
-    private String lastname;
-    private String password;
-    private String role;
+    public int user_id;
+    public String sid;
+    public String email;
+    public String user_name;
+    public String first_name;
+    public String last_name;
+    public String password;
+    public String role;
 }

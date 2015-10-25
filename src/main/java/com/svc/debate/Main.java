@@ -11,12 +11,11 @@ import spark.ModelAndView;
 import spark.Spark;
 import spark.template.freemarker.FreeMarkerEngine;
 
-import static spark.Spark.get;
-import static spark.Spark.post;
-import static spark.Spark.webSocket;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import static spark.Spark.*;
+
 /**
  * Created by doyonghoon on 2015. 10. 24..
  */
@@ -47,9 +46,11 @@ public class Main {
       res.status(200);
       res.type("text/html");
       DatabaseService db = new DatabaseService();
-      List<Users> list = new ArrayList<Users>();
-      list = db.authenticateUser(req.queryMap("cs_login_sid").value(), req.queryMap("cs_login_password").value());
-      if (list.isEmpty())
+
+      boolean flag = db.authenticateValidUser(req.queryMap("cs_login_sid").value(), req.queryMap("cs_login_password").value());
+      System.out.println("flag: "+ flag);
+
+      if (!flag)
         return freeMarkerEngine.render(new ModelAndView(null, "assets/home.ftl"));
       else
         return freeMarkerEngine.render(new ModelAndView(null, "assets/debate.ftl"));
