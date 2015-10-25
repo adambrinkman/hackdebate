@@ -173,10 +173,10 @@
             <!-- Heading Panel with debate topic -->
             <div id="topicHeading" class="row">
                 <div class="col-lg-12">
-                    <div class="panel panel-default">
+                    <div class="panel panel-success">
                         <div class="panel-heading">
                             <div class="row">
-                                <div class="col-sm-10">
+                                <div class="col-sm-12">
                                         <form class="col-md-12" method="post" action="/insertPost">
                                             <div class="form-group">
                                                 <strong>Create a new Post:</strong>
@@ -185,10 +185,19 @@
                                                 <input type="text" class="form-control input-lg" name="post" />
                                             </div>
                                             <div class="form-group">
-                                                <input type="datetime-local" class="form-control" name="begindate" />
+                                                <input type="datetime-local" class="form-control" name="begindate" size="30%" />
                                             </div>
                                             <div class="form-group">
                                                 <input type="datetime-local" class="form-control" name="enddate" />
+                                            </div>
+                                            <div class="form-group">
+                                                <strong>Want to provide a reference? (Optional)</strong>
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="text" class="form-control input-lg" name="book" />
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="submit" class="btn btn-primary btn-lg" value="Search"/>
                                             </div>
                                             <div class="form-group">
                                                 <input type="submit" class="btn btn-primary btn-lg" />
