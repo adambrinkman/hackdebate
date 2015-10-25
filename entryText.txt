@@ -1,11 +1,14 @@
-* The Apis/Platforms your project uses: Chegg API, Bootstrap, Spark, Websockets
+* The Apis/Platforms your project uses
+Chegg API, Bootstrap, Spark, Websockets
 
-* Selection of the challenge you are competing in: Best use of Chegg API
+* Selection of the challenge you are competing in
+Best use of Chegg API, Top EDU
 
-* Project title: HackDebate
+* Project title
+HackDebate
 
-* Project tagline:  Web application that allows teachers to host live, educational debate and group discussions among students. 
+* Project tagline
+Web application that allows teachers to host live, educational debate and group discussions among students.
 
-* Project description (should be approximately 100-500 words): The web application allows students to log into a debate bash board, where they can select their class. The professor would provide a debate topic, a pros and cons panels at a glance, valid source for students to reference, and a deadline for participation.
-
-* Project screenshots or image/logo, with a maximum size of 5mb; format should be JPG, PNG or GIF with a 3:2 aspect ratio:
+* Project description (should be approximately 100-500 words)
+The web application allows students to log into a debate bash board, where they can select their class. The professor would provide a debate topic, a pros and cons panels at a glance, valid source for students to reference, and a deadline for participation. The professors, while providing topic, also searches for books from Chegg API and refers these to students for their research.
