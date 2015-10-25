@@ -171,7 +171,7 @@
                             <div class="panel-heading">
                                 <div class="row">
                                 <div class="col-sm-10">
-                                    <p class="lead"><strong>Topic: </strong><small><em>Should there be more strict regulation of antibiotics/ should patients look elsewhere like herbals, diet, lifestyle for treatments?</em></p></small>
+                                <p class="lead"><strong>Topic: </strong><small><em>Is progressive tax rates unfair?</em></p></small>
                                 </div>
                                 <div class="col-sm-2">
                                     <div class="panel panel-danger text-center">
@@ -190,14 +190,16 @@
                         <h3>Pros</h3>
                         <div class="table-responsive">
                             <table id="prosColumn" class="table table-hover table-striped">
-                              <thead>
-                                <tr>
-                                  <td class="debatorName">Student C's Name</td>
-                                  <td class="debatorArg">Student C's argument</td>
-                                </tr>
-                              </thead>
-                              <tbody id="prosColumnBody">
-                              </tbody>
+                                <tbody>
+                                    <tr>
+                                        <td class="debatorName">Student A's Name</td>
+                                        <td class="debatorArg">Student A's argument</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="debatorName">Student B's Name</td>
+                                        <td class="debatorArg">Student B's argument</td>
+                                    </tr>
+                                </tbody>
                             </table>
                         </div><!-- /.table-responsive -->
                     </div><!-- /#prosColumn.col-lg-6 -->
@@ -205,14 +207,16 @@
                         <h3>Cons</h3>
                         <div class="table-responsive">
                             <table id="consColumn" class="table table-hover table-striped">
-                              <thead>
-                                <tr>
-                                  <td class="debatorName">Student C's Name</td>
-                                  <td class="debatorArg">Student C's argument</td>
-                                </tr>
-                              </thead>
-                              <tbody id="consColumnBody">
-                              </tbody>
+                                <tbody>
+                                    <tr>
+                                        <td class="debatorName">Student C's Name</td>
+                                        <td class="debatorArg">Student C's argument</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="debatorName">Student D's Name</td>
+                                        <td class="debatorArg">Student D's argument</td>
+                                    </tr>
+                                </tbody>
                             </table>
                         </div><!-- /.table-responsive -->
                     </div><!-- /.#consColumn.col-lg-6 -->
