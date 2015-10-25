@@ -7,7 +7,6 @@ import org.eclipse.jetty.websocket.api.annotations.OnWebSocketClose;
 import org.eclipse.jetty.websocket.api.annotations.OnWebSocketConnect;
 import org.eclipse.jetty.websocket.api.annotations.OnWebSocketMessage;
 import org.eclipse.jetty.websocket.api.annotations.WebSocket;
-import org.json.JSONObject;
 
 /**
  * Created by doyonghoon on 2015. 10. 24..
@@ -15,26 +14,27 @@ import org.json.JSONObject;
 
 @WebSocket
 public class DebateSocket {
+
+  private SocketServer handler;
   private Session session;
 
   @OnWebSocketConnect
   public void connected(Session session) {
     this.session = session;
+    handler = new SocketServer();
     WLog.i("connected");
   }
 
   @OnWebSocketClose
   public void closed(int statusCode, String reason) {
     this.session = null;
+    handler = null;
     WLog.i("closed");
   }
 
   @OnWebSocketMessage
   public void message(String message) throws IOException {
-    WLog.i("Got: " + message);   // Print message
-    session.getRemote().sendString(message); // and send it back
-    SocketServer socketServer = new SocketServer();
-    String result = socketServer.handleMessage(message);
-    session.getRemote().sendString(result);
+    WLog.i("Got: " + message);
+    session.getRemote().sendString(handler.handleMessage(message));
   }
 }

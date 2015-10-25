@@ -188,16 +188,14 @@
                         <h3>Pros</h3>
                         <div class="table-responsive">
                             <table id="prosColumn" class="table table-hover table-striped">
-                                <tbody>
-                                    <tr>
-                                        <td class="debatorName">Student A's Name</td>
-                                        <td class="debatorArg">Student A's argument</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="debatorName">Student B's Name</td>
-                                        <td class="debatorArg">Student B's argument</td>
-                                    </tr>
-                                </tbody>
+                              <thead>
+                                <tr>
+                                  <td class="debatorName">Student C's Name</td>
+                                  <td class="debatorArg">Student C's argument</td>
+                                </tr>
+                              </thead>
+                              <tbody id="prosColumnBody">
+                              </tbody>
                             </table>
                         </div><!-- /.table-responsive -->
                     </div><!-- /#prosColumn.col-lg-6 -->
@@ -205,16 +203,14 @@
                         <h3>Cons</h3>
                         <div class="table-responsive">
                             <table id="consColumn" class="table table-hover table-striped">
-                                <tbody>
-                                    <tr>
-                                        <td class="debatorName">Student C's Name</td>
-                                        <td class="debatorArg">Student C's argument</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="debatorName">Student D's Name</td>
-                                        <td class="debatorArg">Student D's argument</td>
-                                    </tr>
-                                </tbody>
+                              <thead>
+                                <tr>
+                                  <td class="debatorName">Student C's Name</td>
+                                  <td class="debatorArg">Student C's argument</td>
+                                </tr>
+                              </thead>
+                              <tbody id="consColumnBody">
+                              </tbody>
                             </table>
                         </div><!-- /.table-responsive -->
                     </div><!-- /.#consColumn.col-lg-6 -->

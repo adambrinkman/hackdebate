@@ -4,7 +4,6 @@ import com.svc.debate.service.Authenticate;
 import com.svc.debate.service.DatabaseService;
 import com.svc.debate.service.MainService;
 import com.svc.debate.socket.DebateSocket;
-import com.svc.debate.util.WLog;
 import freemarker.cache.ClassTemplateLoader;
 import freemarker.template.Configuration;
 import spark.ModelAndView;

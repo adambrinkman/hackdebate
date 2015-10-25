@@ -13,10 +13,6 @@ import java.sql.Timestamp;
 public class TimestampSerializer implements JsonDeserializer<Timestamp> {
   @Override
   public Timestamp deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {
-    if (jsonElement != null) {
-      long utc = Long.parseLong(jsonElement.getAsString());
-      return new Timestamp(utc);
-    }
-    return null;
+    return jsonElement != null ? new Timestamp(Long.parseLong(jsonElement.getAsString())) : null;
   }
 }
