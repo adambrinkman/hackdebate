@@ -9,6 +9,8 @@ import spark.ModelAndView;
 import spark.Spark;
 import spark.template.freemarker.FreeMarkerEngine;
 
+import java.util.ArrayList;
+
 import static spark.Spark.get;
 import static spark.Spark.post;
 import static spark.Spark.webSocket;
@@ -42,14 +44,22 @@ public class Main {
       res.status(200);
       res.type("text/html");
       DatabaseService db = new DatabaseService();
+      ArrayList<String> list = new ArrayList<String>();
 
-      boolean flag = db.authenticateValidUser(req.queryMap("cs_login_sid").value(), req.queryMap("cs_login_password").value());
-      System.out.println("flag: "+ flag);
+      list = db.authenticateValidUser(req.queryMap("login_email").value(), req.queryMap("login_password").value());
+      System.out.println("list: "+ !list.isEmpty());
 
-      if (!flag)
+      if (list.isEmpty())
         return freeMarkerEngine.render(new ModelAndView(null, "assets/home.ftl"));
-      else
-        return freeMarkerEngine.render(new ModelAndView(null, "assets/debate.ftl"));
+      else {
+        res.cookie("userId", list.get(0));
+        res.cookie("role", list.get(1));
+        System.out.println("Cookie: " + list.get(0) +", " + list.get(1));
+        if(list.get(1).equalsIgnoreCase("Professor"))
+          return freeMarkerEngine.render(new ModelAndView(null, "assets/Professor.ftl"));
+        else
+          return freeMarkerEngine.render(new ModelAndView(null, "assets/debate.ftl"));
+      }
     });
   }
 }
