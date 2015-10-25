@@ -2,29 +2,35 @@ package com.svc.debate.service;
 
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.svc.debate.model.Post;
+import com.svc.debate.model.Users;
 import org.sql2o.*;
 import java.util.UUID;
 import java.util.Date;
 import java.util.List;
-import javax.sql.DataSource;
-import java.sql.SQLException;
-import java.sql.*;
 /**
  * Created by dsawla on 10/24/2015.
  */
 public class DatabaseService {
 
     public static Sql2o returnString() {
-        Sql2o sql2o = new Sql2o("jdbc:postgresql://localhost:3306/myDB", "myUsername", "topSecretPassword");
+        Sql2o sql2o = new Sql2o("jdbc:postgresql://localhost:5432/postgres", "postgres", "123");
         return sql2o;
     }
 
-    public boolean authenticateUser(String username, String password) {
-        String connectionString = "";
-        String query="select username, password from login where username = '" + username + "' and password = '" + password + "';";
+    public List<Users> authenticateUser(String username, String password) {
+        String query="select user_id, password from Users where sid = '" + username + "' and password = '" + password + "';";
+        System.out.println(query);
 
-        DatabaseService db = new DatabaseService();
-        return db.get(query);
+        Sql2o sql2o = returnString();
+        System.out.println("sql2o: " + sql2o);
+        System.out.println(username + " " + password);
+
+        try (org.sql2o.Connection conn = sql2o.open()) {
+            System.out.println("opened " + conn);
+        return conn.createQuery("select user_id, password from Users where sid=:username")
+            .addParameter("sid", username)
+            .executeAndFetch(Users.class);
+        }
     }
 
     /*creates a new post*/

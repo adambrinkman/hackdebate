@@ -1,5 +1,6 @@
 package com.svc.debate;
 
+import com.svc.debate.model.Users;
 import com.svc.debate.service.Authenticate;
 import com.svc.debate.service.DatabaseService;
 import com.svc.debate.service.MainService;
@@ -11,8 +12,11 @@ import spark.Spark;
 import spark.template.freemarker.FreeMarkerEngine;
 
 import static spark.Spark.get;
-
+import static spark.Spark.post;
 import static spark.Spark.webSocket;
+
+import java.util.ArrayList;
+import java.util.List;
 /**
  * Created by doyonghoon on 2015. 10. 24..
  */
@@ -39,16 +43,28 @@ public class Main {
       return freeMarkerEngine.render(new ModelAndView(null, "assets/debate.ftl"));
     });
 
-    get("/login", (req, res) -> {
+    post("/login", (req, res) -> {
+      res.status(200);
+      res.type("text/html");
+      DatabaseService db = new DatabaseService();
+      List<Users> list = new ArrayList<Users>();
+      list = db.authenticateUser(req.queryMap("cs_login_sid").value(), req.queryMap("cs_login_password").value());
+      if (list.isEmpty())
+        return freeMarkerEngine.render(new ModelAndView(null, "assets/home.ftl"));
+      else
+        return freeMarkerEngine.render(new ModelAndView(null, "assets/debate.ftl"));
+    });
+
+    /*get("/login", (req, res) -> {
       res.status(200);
       res.type("text/html");
       Authenticate authenticate = new Authenticate();
       DatabaseService db = new DatabaseService();
       boolean flag = db.authenticateUser(req.params("username"), req.params("password"));
-      if(!flag)
+      if (!flag)
         return freeMarkerEngine.render(new ModelAndView(null, "assets/home.ftl"));
       else
-        return freeMarkerEngine.render(new ModelAndView(null, "assets/page1.ftl"));
-    });
+        return freeMarkerEngine.render(new ModelAndView(null, "assets/debate.ftl"));
+    });*/
   }
 }

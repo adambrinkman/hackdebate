@@ -5,7 +5,7 @@ package com.svc.debate.model;
  */
 
 //@Data
-public class User {
+public class Users {
     private int user_id;
     private String sid;
     private String email;
