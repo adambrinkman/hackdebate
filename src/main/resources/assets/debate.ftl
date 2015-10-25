@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>HackDebate Dashboard</title>
+    <title>HackDebate Board</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
@@ -43,7 +43,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">SB Admin</a>
+                <a class="navbar-brand" href="index.html">John's Debate Board</a>
             </div>
             <!-- Top Menu Items -->
             <ul class="nav navbar-right top-nav">
@@ -178,44 +178,69 @@
                 <!-- /.row -->
 
                 <!-- Heading Panel with debate topic -->
-                <div class="jumbotron">
-                    <h3>Topic:</h3>
-                    <p>Should there be more strict regulation of antibiotics/ should patients look elsewhere like herbals, diet, lifestyle for treatments?</p>
-                    <div class="row">
-                        <div class="col-sm-3 pull-right">
-                            <div class="panel panel-danger">
-                                <div class="panel-heading">
-                                    <h3 class="panel-title">End Time</h3>
-                                </div>
-                                <div class="panel-body">
-                                    10/25/2015 10:00 AM
-                                </div>
-                            </div><!-- /.panel-->
-                        </div>
-                    </div><!-- /.row-->
-                </div>
+                <div id="topicHeading" class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h2>Topic:</h2>
+                                <p class="lead"><em>Should there be more strict regulation of antibiotics/ should patients look elsewhere like herbals, diet, lifestyle for treatments?</em></p>
+                                <div class="row">
+                                    <div class="col-lg-3 pull-right"><div class="panel panel-danger">
+                                        <div class="panel-heading"><h3 class="panel-title">End Time: </h3>10/25/2015 10:00 AM</div>
+                                    </div></div><!-- /.col-sm-3 and /.panel-->
+                                </div><!-- /.row -->
+                            </div>
+                        </div><!-- /.panel -->
+                    </div>
+                </div><!-- /#topicHeading -->
 
                 <!-- Debate post display board-->
-                <div class="row vdivide">
-                    <div class="col-sm-6">
-                        <div class="form-group text-center">
-                            <label>Pros</label>
-                            div.
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="form-group text-center">
-                            <label>Cons</label>
-                        </div>
-                    </div>
+                <div class="row vdivide text-center">
+                    <div class="col-lg-6">
+                        <h3>Pros</h3>
+                        <div class="table-responsive">
+                            <table id="prosColumn" class="table table-hover table-striped">
+                                <tbody>
+                                    <tr>
+                                        <td class="debatorName">Student A's Name</td>
+                                        <td class="debatorArg">Student A's argument</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="debatorName">Student B's Name</td>
+                                        <td class="debatorArg">Student B's argument</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div><!-- /.table-responsive -->
+                    </div><!-- /#prosColumn.col-lg-6 -->
+                    <div class="col-lg-6">
+                        <h3>Cons</h3>
+                        <div class="table-responsive">
+                            <table id="consColumn" class="table table-hover table-striped">
+                                <tbody>
+                                    <tr>
+                                        <td class="debatorName">Student C's Name</td>
+                                        <td class="debatorArg">Student C's argument</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="debatorName">Student D's Name</td>
+                                        <td class="debatorArg">Student D's argument</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div><!-- /.table-responsive -->
+                    </div><!-- /.#consColumn.col-lg-6 -->
+                </div>
+                <!-- /.row -->
                 </div><!-- /.row vdivide-->
-                <div class="row center-block" style="float:none">
-                  <div class="input-group">
-                    <input type="text" placeholder="Enter your opinion" class="form-control" id="debate-text">
-                    <span class="input-group-btn">
-                      <button type="submit" class="btn btn-default" id="send-post">SEND</button>
-                    </span>
-                  </div>
+                <div class="col-lg-6 center-block text-center" style="float:none">
+                    <form class="form-inline">
+                        <div class="form-group">
+                            <label class="sr-only" for="argumentInput">Opinion</label>
+                            <input type="text" class="form-control" id="debate-text" placeholder="Enter your opinion">
+                        </div>
+                        <button type="submit" class="btn btn-default" id="send-post">SEND</button>
+                    </form>
                 </div><!-- /.row-->
             </div>
             <!-- /.container-fluid -->

@@ -10,7 +10,7 @@ $(document).ready(function() {
 		var text = $('#debate-text').val();
 		var post = createPost(userId, timestamp, text);
 		console.log("post: " + JSON.stringify(post));
-		socket.send(post);
+		socket.send(JSON.stringify(post));
 	});
 
 	socket.onmessage = function(data) {
@@ -20,7 +20,7 @@ $(document).ready(function() {
 
 function createPost(userId, timestamp, text) {
 	return {
-		"userId": userId,
+		"user_id": userId,
 		"timestamp": timestamp,
 		"text": text
 	};
