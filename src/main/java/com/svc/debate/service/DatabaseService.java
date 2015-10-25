@@ -1,6 +1,7 @@
 package com.svc.debate.service;
 
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -62,13 +63,13 @@ public class DatabaseService {
   public boolean insertPost(String text, Timestamp time, String userId) {
     try {
       Class.forName("org.postgresql.Driver");
-      Statement stmt = getConnection().createStatement();
-      String query = "insert into \"Post\"(post_id, time, text, user_id) VALUES (:post_id, :time, :text, :user_id)";
-      System.out.println(query);
-      ResultSet rs = stmt.executeQuery(query);
-      if(rs.next()) {
-        return true;
-      }
+      PreparedStatement s = getConnection().prepareCall("insert into \"Post\"(post_id, time, text, user_id) VALUES (?, ?, ?, ?)");
+      s.setInt(1, Integer.valueOf("2"));
+      s.setTimestamp(2, time);
+      s.setString(3, text);
+      s.setInt(4, Integer.parseInt(userId));
+      int result = s.executeUpdate();
+      return result > 0;
     }
     catch(Exception e) {
       System.out.println(e.toString());

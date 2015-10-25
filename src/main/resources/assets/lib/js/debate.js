@@ -15,8 +15,7 @@ $(document).ready(function() {
 	});
 
 	socket.onmessage = function(res) {
-		console.log("data: " + JSON.stringify(res.data));
-		addOpinionColumn(res.data);
+		addOpinionColumn($.parseJSON(res.data));
 	};
 });
 
@@ -29,10 +28,10 @@ function createPost(userId, timestamp, text) {
 }
 
 function addOpinionColumn(p) {
-	console.log("p: " + JSON.stringify(p));
+	console.log("text: " + p.text);
 	var column = $('#prosColumnBody');
-	var textElement = $('<td></td>').text(post.text);
-	var nameElement = $('<td></td>').text(post.user_id);
+	var textElement = $('<td></td>').text(p.text);
+	var nameElement = $('<td></td>').text(p.user_id);
 	var row = $('<tr>/<tr>');
 	row.append(nameElement);
 	row.append(textElement);
