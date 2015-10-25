@@ -41,6 +41,13 @@ public class Main {
       return freeMarkerEngine.render(new ModelAndView(createCommonMap(), "assets/debate.ftl"));
     });
 
+    get("/searchBooks", (req, res) -> {
+      res.status(200);
+      res.type("text/html");
+      System.out.println("Books: "+ req.queryMap("books").value());
+      return freeMarkerEngine.render(new ModelAndView(createCommonMap(), "assets/debate.ftl"));
+    });
+
     post("/login", (req, res) -> {
       res.status(200);
       res.type("text/html");
