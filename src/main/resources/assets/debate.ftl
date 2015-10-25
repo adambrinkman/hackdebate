@@ -132,8 +132,8 @@
                             <table id="consColumn" class="table table-hover table-striped">
                               <thead>
                                 <tr>
-                                  <td class="debatorName">Name</td>
-                                  <td class="debatorArg">Argument</td>
+                                  <th class="debatorName">Name</th>
+                                  <th class="debatorArg">Argument</th>
                                 </tr>
                               </thead>
                               <tbody id="consColumnBody">

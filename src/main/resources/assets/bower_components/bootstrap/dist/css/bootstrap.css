@@ -2276,11 +2276,11 @@ th {
   padding: 8px;
   line-height: 1.42857143;
   vertical-align: top;
-  border-top: 1px solid #ddd;
+  border-top: 1px none;
 }
 .table > thead > tr > th {
   vertical-align: bottom;
-  border-bottom: 2px solid #ddd;
+  border-bottom: 2px none;
 }
 .table > caption + thead > tr:first-child > th,
 .table > colgroup + thead > tr:first-child > th,
@@ -6833,11 +6833,6 @@ button.close {
 #topic #endTime {
   margin-bottom: 0;
 }
-#wrapper {
-  height: 100%;
-}
-#page-wrapper {
-  height:100%;
 }
 @media (min-width: 768px) {
   #wrapper {
