@@ -73,6 +73,7 @@ public class CheggService {
         return eans;
     }
 
+
     private Book bookFromEan(String ean) {
         Request request = new Request.Builder()
                 .url("https://hackingedu.chegg.com/hacking-edu/catalog/priced/byEan/" + ean)

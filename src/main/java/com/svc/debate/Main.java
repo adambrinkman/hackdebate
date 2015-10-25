@@ -1,6 +1,8 @@
 package com.svc.debate;
 
+import com.google.gson.Gson;
 import com.svc.debate.model.Users;
+import com.svc.debate.service.CheggService;
 import com.svc.debate.service.DatabaseService;
 import com.svc.debate.service.MainService;
 import com.svc.debate.socket.DebateSocket;
@@ -78,6 +80,14 @@ public class Main {
       return freeMarkerEngine.render(new ModelAndView(null, "assets/Professor.ftl"));
     });
 
+
+      get("/books", (req, res) -> {
+          String bookGuess = req.queryMap("guess").value();
+          CheggService cService = new CheggService();
+          Gson gson = new Gson();
+
+          return gson.toJson(cService.findBook(bookGuess));
+      });
 
     post("/login", (req, res) -> {
       res.status(200);
