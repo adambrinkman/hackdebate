@@ -224,10 +224,10 @@
                 <div class="col-lg-6 center-block text-center" style="float:none">
                     <form class="form-inline">
                         <div class="form-group">
-                            <label class="sr-only" for="argumentInput">Argument</label>
-                            <input type="text" class="form-control" id="argumentInput" placeholder="Argument Contents">
+                            <label class="sr-only" for="argumentInput">Opinion</label>
+                            <input type="text" class="form-control" id="debate-text" placeholder="Enter your opinion">
                         </div>
-                        <button type="submit" class="btn btn-default">Submit</button>
+                        <button type="submit" class="btn btn-default" id="send-post">SEND</button>
                     </form>
                 </div><!-- /.row-->
             </div>

@@ -80,8 +80,6 @@ public class DatabaseService {
         }
     }
 
-    public
-
     public boolean post(String query) {
         return true;
     }

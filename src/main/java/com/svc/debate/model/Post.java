@@ -1,39 +1,34 @@
 package com.svc.debate.model;
 
-import org.apache.commons.lang3.math.NumberUtils;
-
+import com.google.gson.annotations.SerializedName;
 import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 /**
  * Created by dsawla on 10/24/2015.
  */
 public class Post {
-    private int post_id;
-    private String time;
-    private Timestamp timestamp;
-    private String text;
-    private String user_id;
+    @SerializedName("post_id") private int post_id;
+    @SerializedName("time") private long time;
+    @SerializedName("timestamp") private Timestamp timestamp;
+    @SerializedName("text") private String text;
+    @SerializedName("user_id") private String user_id;
 
-    private long timeToLong() {
-        if (NumberUtils.isNumber(time)) {
-            return Long.parseLong(time);
-        }
+//    private long timeToLong(long t) {
+//        if (NumberUtils.isNumber(t)) {
+//            return Long.parseLong(t);
+//        }
+//        return -1;
+//    }
 
-        return -1;
+    public void setTimeToTimestamp(long time) {
+        this.timestamp = new Timestamp(time);
     }
 
-    public void timeToTimestamp () {
-        long longTime = timeToLong();
-        this.timestamp = new Timestamp(longTime);
-    }
-
-    public int getPost_id() {
+    public int getPostId() {
         return post_id;
     }
 
-    public String getTime() {
+    public long getTime() {
         return time;
     }
 
@@ -45,7 +40,7 @@ public class Post {
         return text;
     }
 
-    public String getUser_id() {
+    public String getUserId() {
         return user_id;
     }
 }
