@@ -4,44 +4,59 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Hack Debate</title>
+    <title>HackDebate: Login</title>
     <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="lib/reconnecting-websocket.min.js"></script>
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
+    <link href="nback.css" rel="stylesheet">
+        <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="home.js"></script>
+    <!--<script src="switchPanel.js"></script>-->
+
+    <script>
+
+        $(document).ready(function(){
+                $("#two").hide();
+        });
+
+        $(document).ready(function(){
+            $("#radio1").click(function(){
+                 $("#two").hide();
+                 $("#one").show();
+            });
+            $("#radio2").click(function(){
+                $("#one").hide();
+                $("#two").show();
+            });
+        });
+    </script>
 </head>
 <body>
     <div class="container" id="comments">
-        <div class="page-header">
-            <h1>Welcome!</h1>
+        <!-- Main jumbotron for site header -->
+        <div class="jumbotron" style="padding-left:20px; padding-top: 0; padding-bottom:3px;  margin-top: 10px; ">
+            <h1><span style="color:#04B486;">HackDebate</span>
+                <span class="lead text-right" style="color:gray;"><em>Interactive-Based Learning</em><span>
+            </h1>
         </div>
-
+        
         <form role="form">
-            <div class="panel">
-                <div class="panel-body">
-                    <label class="radio-inline">
-                        <input type="radio" name="optradio">
-                        College Student
+            <div class="panel text-center">
+                <div class="panel-body center-block">
+                    <label class="radio-inline"><!-- style=" width 200px; height 100px;" -->
+                        <input type="radio" name="optradio" id="radio1" checked>Student
                     </label>
                     <label class="radio-inline">
-                        <input type="radio" name="optradio">High School Student
+                        <input type="radio" name="optradio" id="radio2">Professor
                     </label>
                 </div>
             </div>
         </form>
 
-        <!-- Simple College Student Login - START -->
-        <div class="panel panel-success" style="width: 50%">
-            <div class="panel-heading">College Student Login</div>
+        <!-- Simple Student Login - START -->
+        <div class="panel panel-success center-block" style="width: 50%" id="one">
+            <div class="panel-heading">Student Login</div>
             <div class="panel-body">
                 <form class="col-md-12" method="post" action="/login">
-                    <div class="form-group">
-                        <input type="text" class="form-control input-lg" placeholder="Student ID" name="cs_login_sid" required>
-                    </div>
                     <div class="form-group">
                         <input type="email" class="form-control input-lg" placeholder="Email" name="cs_login_email" required>
                     </div>
@@ -57,19 +72,16 @@
             </div>
         </div>
         <!-- Simple College Student Login - END -->
-        <!-- Simple High School Student Login - START -->
-        <div class="panel panel-success" style="width: 50%">
-            <div class="panel-heading">High School Student Login</div>
+        <!-- Simple Professor Login - START -->
+        <div class="panel panel-success center-block" style="width: 50%" id="two">
+            <div class="panel-heading">Professor Login</div>
             <div class="panel-body">
                 <form class="col-md-12" action="/login" method="post">
                     <div class="form-group">
-                        <input type="text" class="form-control input-lg" placeholder="Name" name="hs_login_name" required>
+                        <input type="text" class="form-control input-lg" placeholder="Email" name="pf_login_email" required>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control input-lg" placeholder="School Name" name="hs_login_schoolname" required>
-                    </div>
-                    <div class="form-group">
-                        <input type="password" class="form-control input-lg" placeholder="Password" name="hs_login_password" required>
+                        <input type="password" class="form-control input-lg" placeholder="Password" name="pf_login_password" required>
                     </div>
                     <div class="form-group">
                         <input type="submit" class="btn btn-primary btn-lg btn-block">Sign In
@@ -80,7 +92,8 @@
             </div>
         </div>
         <!-- Simple High School Student Login - END -->
-        <!-- Simple High School Student Registration - START -->
+
+<!-- In Progres Coding. Hidden for now. Simple High School Student Registration - START
         <div class="panel panel-success" style="width: 50%">
             <div class="panel-heading">Student Registration</div>
             <div class="panel-body">
@@ -113,13 +126,11 @@
                 </form>
             </div>
         </div>
-        <!-- Simple High School Student Registration - END -->
+Simple High School Student Registration - END //-->
 
 
     </div>
 
-    <script src="bower_components/jquery/dist/jquery.min.js"></script>
-    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="lib/js/home.js"></script>
+
 </body>
 </html>

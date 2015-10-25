@@ -1,0 +1,10 @@
+$(document).ready(function(){
+    $("#radio1").click(function(){
+         $("#one").hide();
+         $("#two").show();
+	});
+    $("#radio2").click(function(){
+        $("#two").hide();
+        $("#one").show();
+    });
+});

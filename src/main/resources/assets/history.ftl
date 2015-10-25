@@ -27,6 +27,12 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+    <script type="text/javascript">
+    var PORT = "${PORT}";
+    function getPort() {
+        return PORT;
+    }
+    </script>
 </head>
 
 <body>
@@ -46,103 +52,7 @@
             </div>
             <!-- Top Menu Items -->
             <ul class="nav navbar-right top-nav">
-                <li class="dropdown"><!--dropdown for message-->
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-envelope"></i> <b class="caret"></b></a>
-                    <ul class="dropdown-menu message-dropdown">
-                        <li class="message-preview">
-                            <a href="#">
-                                <div class="media">
-                                    <span class="pull-left">
-                                        <img class="media-object" src="http://placehold.it/50x50" alt="">
-                                    </span>
-                                    <div class="media-body">
-                                        <h5 class="media-heading"><strong>John Smith</strong></h5>
-                                        <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
-                                        <p>Lorem ipsum dolor sit amet, consectetur...</p>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="message-preview">
-                            <a href="#">
-                                <div class="media">
-                                    <span class="pull-left">
-                                        <img class="media-object" src="http://placehold.it/50x50" alt="">
-                                    </span>
-                                    <div class="media-body">
-                                        <h5 class="media-heading"><strong>John Smith</strong>
-                                        </h5>
-                                        <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
-                                        <p>Lorem ipsum dolor sit amet, consectetur...</p>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="message-preview">
-                            <a href="#">
-                                <div class="media">
-                                    <span class="pull-left">
-                                        <img class="media-object" src="http://placehold.it/50x50" alt="">
-                                    </span>
-                                    <div class="media-body">
-                                        <h5 class="media-heading"><strong>John Smith</strong>
-                                        </h5>
-                                        <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
-                                        <p>Lorem ipsum dolor sit amet, consectetur...</p>
-                                    </div>
-                                </div> <!-- /.media-->
-                            </a>
-                        </li><!-- /.message-preview-->
-                        <li class="message-footer">
-                            <a href="#">Read All New Replies</a>
-                        </li>
-                    </ul><!-- /.dropdown-menu -->
-                </li><!-- /.dropdown-->
-                <li class="dropdown"><!-- dropdown for alert-->
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i> <b class="caret"></b></a>
-                    <ul class="dropdown-menu alert-dropdown">
-                        <li>
-                            <a href="#">Alert Name <span class="label label-default">Alert Badge</span></a>
-                        </li>
-                        <li>
-                            <a href="#">Alert Name <span class="label label-primary">Alert Badge</span></a>
-                        </li>
-                        <li>
-                            <a href="#">Alert Name <span class="label label-success">Alert Badge</span></a>
-                        </li>
-                        <li>
-                            <a href="#">Alert Name <span class="label label-info">Alert Badge</span></a>
-                        </li>
-                        <li>
-                            <a href="#">Alert Name <span class="label label-warning">Alert Badge</span></a>
-                        </li>
-                        <li>
-                            <a href="#">Alert Name <span class="label label-danger">Alert Badge</span></a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#">View All</a>
-                        </li>
-                    </ul><!-- /.dropdown-menu -->
-                </li><!-- /.dropdown-->
-                <li class="dropdown"><!-- dropdown for user account-->
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> John Smith <b class="caret"></b></a>
-                    <ul class="dropdown-menu"><!-- dropdown for user account-->
-                        <li>
-                            <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-fw fa-envelope"></i> Inbox</a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-fw fa-gear"></i> Settings</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
-                        </li>
-                    </ul><!-- /.dropdown-menu -->
-                </li><!-- /.dropdown -->
+                <li id="userName" class="navbar-brand"><small><i class="fa fa-user"></i> John Smith</small></li>
             </ul><!-- /.nav navbar-right top-nav-->
             <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
             <div class="collapse navbar-collapse navbar-ex1-collapse">
@@ -164,25 +74,36 @@
         <div id="page-wrapper">
             <div class="container-fluid">
 
-                <!-- Heading Panel with debate topic -->
+                        <!-- Heading Panel with debate topic -->
                 <div id="topicHeading" class="row">
                     <div class="col-lg-12">
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <div class="row">
                                 <div class="col-sm-10">
-                                <p class="lead"><strong>Topic: </strong><small><em>Is progressive tax rates unfair?</em></p></small>
+                                    <p class="lead"><strong>Topic: </strong><small><em>Is progressive tax rates unfair?</em></p></small>
                                 </div>
                                 <div class="col-sm-2">
                                     <div class="panel panel-danger text-center">
                                         <div class="panel-heading"><small><h3 class="panel-title">End Time: </h3>10/25/2015 10:00 AM</small></div>
-                                    </div><!-- /.col-sm-3 and /.panel-->
-                                </div><!-- /.row -->
-                            </div>
-                            </div>
-                        </div><!-- /.panel -->
-                    </div>
-                </div><!-- /#topicHeading -->
+                                    </div><!-- /.panel panel-danger text-center-->
+                                </div><!-- /.col-sm-2 -->
+                                <div id="textbook" class="col-sm-12" style="margin-top: 10px;">
+                                    <h5>Recommended Sources:</h5>
+                                    <ul>
+                                        <li>
+                                            <base><em><span class="txtName">A World History of Tax Rebellions</span>, <span class="txtAuthor"> David F. Burg</span>, ISBN: <span class="txtIsbn"> 978-0415924986</span></em></base>
+                                        </li>
+                                        <li>
+                                            <base><em><span class="txtName">For Good and Evil: The Impact of Taxes on the Course of Civilization</span>, <span class="txtAuthor"> Charles Adam</span>, ISBN: <span class="txtIsbn">978-1568332352</span></em></base>
+                                        </li>
+                                    </ul>
+                                </div><!-- /#textbook.col-sm-12-->
+                            </div><!-- /.panel-heading -->
+                        </div><!-- /.panel panel-default -->
+                    </div><!-- /.col-lg-12 -->
+                </div><!-- /#topicHeading.row -->
+
 
                 <!-- Debate post display board-->
                 <div class="row vdivide text-center">
@@ -190,16 +111,14 @@
                         <h3>Pros</h3>
                         <div class="table-responsive">
                             <table id="prosColumn" class="table table-hover table-striped">
-                                <tbody>
-                                    <tr>
-                                        <td class="debatorName">Student A's Name</td>
-                                        <td class="debatorArg">Student A's argument</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="debatorName">Student B's Name</td>
-                                        <td class="debatorArg">Student B's argument</td>
-                                    </tr>
-                                </tbody>
+                              <thead>
+                                <tr>
+                                  <td class="debatorName">Student C's Name</td>
+                                  <td class="debatorArg">Student C's argument</td>
+                                </tr>
+                              </thead>
+                              <tbody id="prosColumnBody">
+                              </tbody>
                             </table>
                         </div><!-- /.table-responsive -->
                     </div><!-- /#prosColumn.col-lg-6 -->
@@ -207,16 +126,14 @@
                         <h3>Cons</h3>
                         <div class="table-responsive">
                             <table id="consColumn" class="table table-hover table-striped">
-                                <tbody>
-                                    <tr>
-                                        <td class="debatorName">Student C's Name</td>
-                                        <td class="debatorArg">Student C's argument</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="debatorName">Student D's Name</td>
-                                        <td class="debatorArg">Student D's argument</td>
-                                    </tr>
-                                </tbody>
+                              <thead>
+                                <tr>
+                                  <td class="debatorName">Student C's Name</td>
+                                  <td class="debatorArg">Student C's argument</td>
+                                </tr>
+                              </thead>
+                              <tbody id="consColumnBody">
+                              </tbody>
                             </table>
                         </div><!-- /.table-responsive -->
                     </div><!-- /.#consColumn.col-lg-6 -->
