@@ -84,7 +84,7 @@
                             <div class="panel-heading">
                                 <div class="row">
                                 <div class="col-sm-10">
-                                    <p class="lead"><strong>Topic: </strong><small><em>Should there be more strict regulation of antibiotics/ should patients look elsewhere like herbals, diet, lifestyle for treatments?</em></p></small>
+                                    <p class="lead topicText"><strong>Topic: </strong><small><em>Should there be more strict regulation of antibiotics/ should patients look elsewhere like herbals, diet, lifestyle for treatments?</em></small></p>
                                 </div>
                                 <div class="col-sm-2">
                                     <div class="panel panel-danger text-center">

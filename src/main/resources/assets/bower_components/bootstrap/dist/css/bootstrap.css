@@ -6743,6 +6743,9 @@ button.close {
      max-width: 150px;
      margin: auto;
   }
+  .topicText {
+    font-size: 20px;
+  }
 }
 @media (min-width: 768px) and (max-width: 991px) {
   .hidden-sm {
