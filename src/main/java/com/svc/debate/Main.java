@@ -3,11 +3,13 @@ package com.svc.debate;
 import com.svc.debate.service.DatabaseService;
 import com.svc.debate.service.MainService;
 import com.svc.debate.socket.DebateSocket;
+import com.svc.debate.util.WLog;
 import freemarker.cache.ClassTemplateLoader;
 import freemarker.template.Configuration;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import org.apache.commons.lang3.StringUtils;
 import spark.ModelAndView;
 import spark.Spark;
 import spark.template.freemarker.FreeMarkerEngine;
@@ -32,13 +34,23 @@ public class Main {
     get("/", (req, res) -> {
       res.status(200);
       res.type("text/html");
-      return freeMarkerEngine.render(new ModelAndView(createCommonMap(), "assets/home.ftl"));
+      if (!hasCookie(req)) {
+        return freeMarkerEngine.render(new ModelAndView(createCommonMap(), "assets/home.ftl"));
+      } else {
+        res.redirect("/debate", 301);
+        res.status(200);
+        return null;
+      }
     });
 
     get("/debate", (req, res) -> {
       res.status(200);
       res.type("text/html");
-      return freeMarkerEngine.render(new ModelAndView(createCommonMap(), "assets/debate.ftl"));
+      Map<String, Object> m = createCommonMap();
+//      if (hasCookie(req)) {
+//        m.put("userId", req.cookie("userId"));
+//      }
+      return freeMarkerEngine.render(new ModelAndView(m, "assets/debate.ftl"));
     });
 
     post("/login", (req, res) -> {
@@ -66,5 +78,10 @@ public class Main {
     Map<String, Object> m = new HashMap<>();
     m.put("PORT", System.getenv("PORT"));
     return m;
+  }
+
+  private static boolean hasCookie(spark.Request req) {
+    WLog.i("cookie: " + req.cookie("userId"));
+    return !StringUtils.isEmpty(req.cookie("userId"));
   }
 }

@@ -1,5 +1,6 @@
 package com.svc.debate.model;
 
+import com.google.gson.annotations.SerializedName;
 import lombok.Data;
 
 /**
@@ -8,76 +9,54 @@ import lombok.Data;
 
 @Data
 public class Users {
-    private int user_id;
-    private String sid;
-    private String email;
-    private String user_name;
-    private String first_name;
-    private String last_name;
-    private String password;
-    private String role;
+  @SerializedName("user_id")
+  private int id;
+  @SerializedName("email")
+  private String email;
+  @SerializedName("user_name")
+  private String userName;
+  @SerializedName("password")
+  private String password;
+  @SerializedName("role")
+  private TypeUser role;
 
-    public int getUser_id() {
-        return user_id;
-    }
+  public TypeUser getRole() {
+    return role;
+  }
 
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
-    }
+  public void setRole(TypeUser role) {
+    this.role = role;
+  }
 
-    public String getSid() {
-        return sid;
-    }
+  public String getPassword() {
+    return password;
+  }
 
-    public void setSid(String sid) {
-        this.sid = sid;
-    }
+  public void setPassword(String password) {
+    this.password = password;
+  }
 
-    public String getEmail() {
-        return email;
-    }
+  public String getUserName() {
+    return userName;
+  }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+  public void setUserName(String userName) {
+    this.userName = userName;
+  }
 
-    public String getUser_name() {
-        return user_name;
-    }
+  public String getEmail() {
+    return email;
+  }
 
-    public void setUser_name(String user_name) {
-        this.user_name = user_name;
-    }
+  public void setEmail(String email) {
+    this.email = email;
+  }
 
-    public String getFirst_name() {
-        return first_name;
-    }
+  public int getId() {
+    return id;
+  }
 
-    public void setFirst_name(String first_name) {
-        this.first_name = first_name;
-    }
-
-    public String getLast_name() {
-        return last_name;
-    }
-
-    public void setLast_name(String last_name) {
-        this.last_name = last_name;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
+  public void setId(int id) {
+    this.id = id;
+  }
 }

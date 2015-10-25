@@ -1,6 +1,5 @@
 package com.svc.debate.socket;
 
-import com.google.gson.JsonObject;
 import com.svc.debate.model.Post;
 import com.svc.debate.service.DatabaseService;
 import com.svc.debate.util.DataUtil;
@@ -17,15 +16,12 @@ public class SocketServer {
   }
 
   public String handleMessage(String message) {
-    JsonObject result = new JsonObject();
     Post post = parsePostFromJson(message);
     boolean hasPosted = attemptPost(post);
-    WLog.i("posted: " + hasPosted);
     return DataUtil.getGson().toJson(post);
   }
 
   private boolean attemptPost(Post post) {
-    WLog.i("post: " + post);
-    return DatabaseService.getInstance().insertPost(post.getText(), post.getTimestamp(), post.getUserId());
+    return DatabaseService.getInstance().insertPost(post);
   }
 }

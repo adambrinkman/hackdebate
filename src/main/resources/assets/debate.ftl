@@ -31,10 +31,10 @@
     <![endif]-->
 
     <script type="text/javascript">
-    var PORT = "${PORT}";
-    function getPort() {
-        return PORT;
-    }
+      var PORT = "${PORT}";
+      function getPort() {
+          return PORT;
+      }
     </script>
 </head>
 
@@ -111,13 +111,13 @@
                 <!-- Debate post display board-->
                 <div class="row vdivide text-center">
                     <div class="col-lg-6">
-                        <h3>Pros</h3>
+                        <h3>In Favor</h3>
                         <div class="table-responsive">
                             <table id="prosColumn" class="table table-hover table-striped">
                               <thead>
                                 <tr>
-                                  <th class="debatorName">Student C's Name</th>
-                                  <th class="debatorArg">Student C's argument</th>
+                                  <th class="debatorName">Name</th>
+                                  <th class="debatorArg">Argument</th>
                                 </tr>
                               </thead>
                               <tbody id="prosColumnBody">
@@ -126,13 +126,13 @@
                         </div><!-- /.table-responsive -->
                     </div><!-- /#prosColumn.col-lg-6 -->
                     <div class="col-lg-6">
-                        <h3>Cons</h3>
+                        <h3>Against</h3>
                         <div class="table-responsive">
                             <table id="consColumn" class="table table-hover table-striped">
                               <thead>
                                 <tr>
-                                  <td class="debatorName">Student C's Name</td>
-                                  <td class="debatorArg">Student C's argument</td>
+                                  <td class="debatorName">Name</td>
+                                  <td class="debatorArg">Argument</td>
                                 </tr>
                               </thead>
                               <tbody id="consColumnBody">
@@ -142,7 +142,7 @@
                     </div><!-- /.#consColumn.col-lg-6 -->
                 </div>
                 <!-- /.row -->
-                <div class="row">
+                <div class="col-lg-12">
                   <div class="input-group">
                     <input type="text" class="form-control" id="debate-text" placeholder="Enter your opinion" />
                     <span class="input-group-btn">
