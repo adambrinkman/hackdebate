@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.svc.debate.model.Post;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.Date;
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.UUID;
 import org.sql2o.Sql2o;
@@ -31,7 +31,6 @@ public class DatabaseService {
     }
 
     public boolean authenticateUser(String username, String password) {
-        String connectionString = "";
         String query="select username, password from login where username = '" + username + "' and password = '" + password + "';";
 
         DatabaseService db = new DatabaseService();
@@ -39,32 +38,35 @@ public class DatabaseService {
     }
 
     /*creates a new post*/
-    public UUID insertPost(String title, String text) {
+    public UUID insertPost(String text, Timestamp time, String userId) {
         Sql2o sql2o = getSqlInstance();
         Post post = new Post();
         ObjectIdGenerators.UUIDGenerator uuidGenerator = new ObjectIdGenerators.UUIDGenerator();
-        UUID postUuid = uuidGenerator.generateId(post);
-
-        System.out.println("postUuid: " + postUuid);
+        UUID postId = uuidGenerator.generateId(post);
 
         try (org.sql2o.Connection conn = sql2o.beginTransaction()) {
-            conn.createQuery("insert into Post(post_uuid, title, content, publishing_date) VALUES (:post_uuid, :title, :content, :date)")
-                    .addParameter("post_uuid", postUuid)
-                    .addParameter("title", title)
-                    .addParameter("content", text)
-                    .addParameter("date", new Date())
+            conn.createQuery("insert into Post(post_id, time, text, user_id) VALUES (:post_id, :time, :text, :user_id)")
+                    .addParameter("post_id", postId)
+                    .addParameter("time", time)
+                    .addParameter("text", text)
+                    .addParameter("user_id", userId)
                     .executeUpdate();
             conn.commit();
-            return postUuid;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
         }
+
+        //TODO: change return?
+        return postId;
     }
 
     /*returns a list of posts for a particular post_id*/
-    public List<Post> getAllPostsOn(UUID post) {
+    public List<Post> getAllFavPostsOn(UUID post) {
         Sql2o sql2o = getSqlInstance();
         try (org.sql2o.Connection conn = sql2o.open()) {
-            return conn.createQuery("select * from comments where post_uuid=:post_uuid")
-                    .addParameter("post_uuid", post)
+            return conn.createQuery("select * from comments where post_id=:post_id")
+                    .addParameter("post_id", post)
                     .executeAndFetch(Post.class);
         }
     }
