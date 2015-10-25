@@ -12,8 +12,7 @@ import java.sql.Timestamp;
  */
 public class Post {
     @SerializedName("post_id") private int post_id;
-    @SerializedName("user_id") private String user_id;
-    @SerializedName("time") private long time;
+    @SerializedName("user_id") private int user_id;
     @SerializedName("timestamp") private Timestamp timestamp;
     @SerializedName("text") private String text;
 
@@ -25,10 +24,6 @@ public class Post {
         return post_id;
     }
 
-    public long getTime() {
-        return time;
-    }
-
     public Timestamp getTimestamp() {
         return timestamp;
     }
@@ -37,7 +32,7 @@ public class Post {
         return text;
     }
 
-    public String getUserId() {
+    public int getUserId() {
         return user_id;
     }
 

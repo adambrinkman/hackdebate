@@ -3,6 +3,7 @@ package com.svc.debate;
 import com.svc.debate.service.DatabaseService;
 import com.svc.debate.service.MainService;
 import com.svc.debate.socket.DebateSocket;
+import com.svc.debate.util.WLog;
 import freemarker.cache.ClassTemplateLoader;
 import freemarker.template.Configuration;
 import java.util.HashMap;
@@ -43,7 +44,7 @@ public class Main {
     post("/login", (req, res) -> {
       res.status(200);
       res.type("text/html");
-      boolean flag = DatabaseService.authenticateValidUser(req.queryMap("cs_login_sid").value(), req.queryMap("cs_login_password").value());
+      boolean flag = DatabaseService.isAuthenticatedUser(req.queryMap("cs_login_sid").value(), req.queryMap("cs_login_password").value());
       System.out.println("flag: " + flag);
       if (!flag)
         return freeMarkerEngine.render(new ModelAndView(createCommonMap(), "assets/home.ftl"));

@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
-import org.sql2o.Sql2o;
 
 /*import org.sql2o.*;
 import org.sql2o.Connection;*/
@@ -17,36 +16,43 @@ import org.sql2o.Connection;*/
 public class DatabaseService {
 
   private static java.sql.Connection mPostgresDatabaseConnection = null;
-
-  public static Sql2o SQL_INSTANCE = null;
   private static DatabaseService singleton = null;
 
   public static DatabaseService getInstance() {
     if (singleton == null) {
       singleton = new DatabaseService();
+      createCourseTableIfNotExists();
+      createDebateTableIfNotExists();
+      createPostTableIfNotExists();
+      createUserTableIfNotExists();
     }
     return singleton;
+  }
+
+  public DatabaseService() {
+    getConnection();
   }
 
   public static java.sql.Connection getConnection() {
     if (mPostgresDatabaseConnection == null) {
       try {
+        Class.forName("org.postgresql.Driver");
         mPostgresDatabaseConnection = DriverManager.getConnection(System.getenv("DATABASE_URL"));
       } catch (SQLException e) {
+        e.printStackTrace();
+      } catch (ClassNotFoundException e) {
         e.printStackTrace();
       }
     }
     return mPostgresDatabaseConnection;
   }
 
-  public static boolean authenticateValidUser(String username, String password) {
+  public static boolean isAuthenticatedUser(String username, String password) {
     boolean flag = true;
-    System.out.println("authenticateValidUser");
-
     try {
       Class.forName("org.postgresql.Driver");
       Statement stmt = getConnection().createStatement();
-      String query = "select user_id, password from \"Users\" where sid = '" + username + "' and password = '" + password + "';";
+      String query = "select user_id, password from users where sid = '" + username + "' and password = '" + password + "';";
       System.out.println(query);
       ResultSet rs = stmt.executeQuery(query);
       flag = rs.next();
@@ -56,18 +62,12 @@ public class DatabaseService {
     return flag;
   }
 
-  public DatabaseService() {
-    getConnection();
-  }
-
-  public boolean insertPost(String text, Timestamp time, String userId) {
+  public boolean insertPost(String text, Timestamp time, int userId) {
     try {
-      Class.forName("org.postgresql.Driver");
-      PreparedStatement s = getConnection().prepareCall("insert into \"Post\"(post_id, time, text, user_id) VALUES (?, ?, ?, ?)");
-      s.setInt(1, Integer.valueOf("2"));
+      PreparedStatement s = getConnection().prepareCall("INSERT INTO post (user_id, time, opinion) VALUES (?, ?, ?)");
+      s.setInt(1, userId);
       s.setTimestamp(2, time);
       s.setString(3, text);
-      s.setInt(4, Integer.parseInt(userId));
       int result = s.executeUpdate();
       return result > 0;
     }
@@ -75,5 +75,41 @@ public class DatabaseService {
       System.out.println(e.toString());
     }
     return false;
+  }
+
+  private static void createUserTableIfNotExists() {
+    try {
+      Statement stmt = getConnection().createStatement();
+        stmt.executeUpdate("CREATE TABLE IF NOT EXISTS users (user_id SERIAL PRIMARY KEY, email TEXT, user_name TEXT, password TEXT, role TEXT)");
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
+
+  private static void createPostTableIfNotExists() {
+    try {
+      Statement stmt = getConnection().createStatement();
+      stmt.executeUpdate("CREATE TABLE IF NOT EXISTS post (post_id SERIAL PRIMARY KEY, user_id INT, time TIMESTAMP, opinion TEXT)");
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
+
+  private static void createDebateTableIfNotExists() {
+    try {
+      Statement stmt = getConnection().createStatement();
+      stmt.executeUpdate("CREATE TABLE IF NOT EXISTS debate (debate_id SERIAL PRIMARY KEY, course_id INT, user_id INT, start_time TIMESTAMP, end_time TIMESTAMP, side TEXT)");
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
+
+  private static void createCourseTableIfNotExists() {
+    try {
+      Statement stmt = getConnection().createStatement();
+      stmt.executeUpdate("CREATE TABLE IF NOT EXISTS course " + "(course_id SERIAL PRIMARY KEY, user_id INT, name TEXT)");
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
   }
 }
