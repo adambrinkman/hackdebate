@@ -1,6 +1,7 @@
 var post;
 $(document).ready(function() {
-	var socket = new ReconnectingWebSocket("ws://localhost:3000/debatechat");
+	// var socket = new ReconnectingWebSocket("ws://localhost:" + getPort() + "/debatechat");
+	var socket = new ReconnectingWebSocket();
   socket.debug = true;
   socket.timeoutInterval = 5400;
 
@@ -36,4 +37,5 @@ function addOpinionColumn(p) {
 	row.append(nameElement);
 	row.append(textElement);
 	column.append(row);
+	console.log("added!");
 }

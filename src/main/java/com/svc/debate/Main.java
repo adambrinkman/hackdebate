@@ -5,6 +5,8 @@ import com.svc.debate.service.MainService;
 import com.svc.debate.socket.DebateSocket;
 import freemarker.cache.ClassTemplateLoader;
 import freemarker.template.Configuration;
+import java.util.HashMap;
+import java.util.Map;
 import spark.ModelAndView;
 import spark.Spark;
 import spark.template.freemarker.FreeMarkerEngine;
@@ -29,27 +31,30 @@ public class Main {
     get("/", (req, res) -> {
       res.status(200);
       res.type("text/html");
-      return freeMarkerEngine.render(new ModelAndView(null, "assets/home.ftl"));
+      return freeMarkerEngine.render(new ModelAndView(createCommonMap(), "assets/home.ftl"));
     });
 
     get("/debate", (req, res) -> {
       res.status(200);
       res.type("text/html");
-      return freeMarkerEngine.render(new ModelAndView(null, "assets/debate.ftl"));
+      return freeMarkerEngine.render(new ModelAndView(createCommonMap(), "assets/debate.ftl"));
     });
 
     post("/login", (req, res) -> {
       res.status(200);
       res.type("text/html");
-      DatabaseService db = new DatabaseService();
-
-      boolean flag = db.authenticateValidUser(req.queryMap("cs_login_sid").value(), req.queryMap("cs_login_password").value());
-      System.out.println("flag: "+ flag);
-
+      boolean flag = DatabaseService.authenticateValidUser(req.queryMap("cs_login_sid").value(), req.queryMap("cs_login_password").value());
+      System.out.println("flag: " + flag);
       if (!flag)
-        return freeMarkerEngine.render(new ModelAndView(null, "assets/home.ftl"));
+        return freeMarkerEngine.render(new ModelAndView(createCommonMap(), "assets/home.ftl"));
       else
-        return freeMarkerEngine.render(new ModelAndView(null, "assets/debate.ftl"));
+        return freeMarkerEngine.render(new ModelAndView(createCommonMap(), "assets/debate.ftl"));
     });
+  }
+
+  private static Map<String, Object> createCommonMap() {
+    Map<String, Object> m = new HashMap<>();
+    m.put("PORT", System.getenv("PORT"));
+    return m;
   }
 }
