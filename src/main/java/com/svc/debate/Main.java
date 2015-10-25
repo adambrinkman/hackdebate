@@ -55,8 +55,10 @@ public class Main {
         m.put("userId", req.cookie("userId"));
         m.put("userName", u.getUserName());
         m.put("userRole", u.getRole().name().toLowerCase());
+        return freeMarkerEngine.render(new ModelAndView(m, "assets/debate.ftl"));
+      } else {
+        return freeMarkerEngine.render(new ModelAndView(null, "assets/home.ftl"));
       }
-      return freeMarkerEngine.render(new ModelAndView(m, "assets/debate.ftl"));
     });
 
     post("/login", (req, res) -> {

@@ -31,8 +31,12 @@
 
     <script type="text/javascript">
       var PORT = "${PORT}";
+      var USER_NAME = "${userName}";
       function getPort() {
           return PORT;
+      }
+      function getUserName() {
+        return USER_NAME;
       }
     </script>
 </head>

@@ -25,6 +25,7 @@ function createPost(userId, timestamp, opinion) {
 		"user_id": userId,
 		"timestamp": timestamp,
 		"opinion": opinion,
+		"user_name": getUserName(),
 		"side": "in_favor"
 	};
 }
