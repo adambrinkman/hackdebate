@@ -4,6 +4,7 @@ import com.svc.debate.model.Users;
 import com.svc.debate.service.DatabaseService;
 import com.svc.debate.service.MainService;
 import com.svc.debate.socket.DebateSocket;
+import com.svc.debate.socket.GroupDiscussionSocket;
 import com.svc.debate.util.WLog;
 import freemarker.cache.ClassTemplateLoader;
 import freemarker.template.Configuration;
@@ -27,6 +28,7 @@ public class Main {
   public static void main(String[] args) {
     DatabaseService.getInstance();
     webSocket("/debatechat", DebateSocket.class);
+//    webSocket("/gd", GroupDiscussionSocket.class);
     Spark.staticFileLocation("/assets");
     FreeMarkerEngine freeMarkerEngine = new FreeMarkerEngine();
     Configuration freeMarkerConfiguration = new Configuration();
@@ -50,6 +52,12 @@ public class Main {
       res.status(200);
       res.type("text/html");
       return routeToDebate(freeMarkerEngine, req);
+    });
+
+    get("/gd", (req, res) -> {
+      res.status(200);
+      res.type("text/html");
+      return routeToGroupDiscussion(freeMarkerEngine, req);
     });
 
     post("/searchBooks", (req, res) -> {
@@ -103,6 +111,19 @@ public class Main {
       m.put("userName", !StringUtils.isEmpty(u.getUserName()) ? u.getUserName() : "");
       m.put("userRole", u.getRole() != null ? u.getRole().name().toLowerCase() : "");
       return freeMarkerEngine.render(new ModelAndView(m, "assets/debate.ftl"));
+    } else {
+      return freeMarkerEngine.render(new ModelAndView(null, "assets/home.ftl"));
+    }
+  }
+
+  private static String routeToGroupDiscussion(FreeMarkerEngine freeMarkerEngine, spark.Request req) {
+    Map<String, Object> m = createCommonMap();
+    if (hasCookie(req)) {
+      Users u = DatabaseService.getUser(NumberUtils.toInt(req.cookie("userId")));
+      m.put("userId", req.cookie("userId"));
+      m.put("userName", !StringUtils.isEmpty(u.getUserName()) ? u.getUserName() : "");
+      m.put("userRole", u.getRole() != null ? u.getRole().name().toLowerCase() : "");
+      return freeMarkerEngine.render(new ModelAndView(m, "assets/gd.ftl"));
     } else {
       return freeMarkerEngine.render(new ModelAndView(null, "assets/home.ftl"));
     }

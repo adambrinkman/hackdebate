@@ -111,7 +111,8 @@
 
                 <!-- Debate post display board-->
                 <div class="row vdivide text-center">
-                    <div class="col-lg-12" style="background-color: white">
+                    <div class="col-lg-12">
+                        <h3>In Favor</h3>
                         <div class="table-responsive">
                             <table id="prosColumn" class="table table-hover table-striped">
                               <thead>
@@ -124,18 +125,21 @@
                               </tbody>
                             </table>
                         </div><!-- /.table-responsive -->
-                        <div class="input-group">
-                          <input type="text" class="form-control" id="debate-text" placeholder="Enter your opinion" />
-                          <span class="input-group-btn">
-                              <button class="btn btn-default" type="button" id="send-post">SEND</button>
-                          </span>
-                        </div>
                     </div><!-- /#prosColumn.col-lg-6 -->
-                    </div><!-- /.#consColumn.col-lg-6 -->
                 </div>
                 <!-- /.row -->
                             </div>
             <!-- /.container-fluid -->
+                <div class="col-lg-12">
+                  <div class="input-group">
+                    <input type="text" class="form-control" id="discuss-text" placeholder="Enter your opinion" />
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="button" id="send-post">SEND</button>
+                    </span>
+                  </div>
+                </div><!-- /.col-lg-12-->
+
+
         </div>
         <!-- /#page-wrapper -->
 
@@ -147,7 +151,7 @@
 
     <!-- Bootstrap Core JavaScript -->
     <script src="bower_components/bootstrap/js/bootstrap.min.js"></script>
-    <script src="lib/js/debate.js"></script>
+    <script src="lib/js/gd.js"></script>
 </body>
 
 </html>

@@ -230,3 +230,11 @@ ul.alert-dropdown {
 .panel-yellow > a:hover {
     color: #df8a13;
 }
+
+.debatorName {
+  text-align: center;
+}
+
+.debatorArg {
+  text-align: center;
+}
