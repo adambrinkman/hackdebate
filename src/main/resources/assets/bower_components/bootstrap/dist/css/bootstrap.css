@@ -6031,6 +6031,7 @@ button.close {
   .modal-sm {
     width: 300px;
   }
+
 }
 @media (min-width: 992px) {
   .modal-lg {
@@ -6738,6 +6739,10 @@ button.close {
   .hidden-xs {
     display: none !important;
   }
+  .panel-danger {
+     max-width: 150px;
+     margin: auto;
+  }
 }
 @media (min-width: 768px) and (max-width: 991px) {
   .hidden-sm {
@@ -6825,3 +6830,4 @@ button.close {
 .debatorName {
   width: 25%;
 }
+
