@@ -3,20 +3,25 @@ $(document).ready(function() {
   socket.debug = true;
   socket.timeoutInterval = 5400;
 
-	$('#send-post').click(function() {
+	$('#send-post').click(function(e) {
+		e.preventDefault();
 		var userId = '';
 		var timestamp = new Date().getTime();
-		var text = $('#debate-text');
-		var post = createPost();
+		var text = $('#debate-text').val();
+		var post = createPost(userId, timestamp, text);
+		console.log("post: " + JSON.stringify(post));
 		socket.send(post);
 	});
+
+	socket.onmessage = function(data) {
+		console.log("response: " + JSON.stringify(data));
+	};
 });
 
 function createPost(userId, timestamp, text) {
-	var post = {
+	return {
 		"userId": userId,
 		"timestamp": timestamp,
 		"text": text
 	};
-	return post;
 }

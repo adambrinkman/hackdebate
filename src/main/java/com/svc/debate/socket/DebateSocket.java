@@ -1,5 +1,6 @@
 package com.svc.debate.socket;
 
+import com.svc.debate.util.WLog;
 import java.io.IOException;
 import org.eclipse.jetty.websocket.api.Session;
 import org.eclipse.jetty.websocket.api.annotations.OnWebSocketClose;
@@ -18,18 +19,18 @@ public class DebateSocket {
   @OnWebSocketConnect
   public void connected(Session session) {
     this.session = session;
-    System.out.println("connected");
+    WLog.i("connected");
   }
 
   @OnWebSocketClose
   public void closed(int statusCode, String reason) {
     this.session = null;
-    System.out.println("closed");
+    WLog.i("closed");
   }
 
   @OnWebSocketMessage
   public void message(String message) throws IOException {
-    System.out.println("Got: " + message);   // Print message
+    WLog.i("Got: " + message);   // Print message
     session.getRemote().sendString(message); // and send it back
   }
 }

@@ -200,6 +200,7 @@
                     <div class="col-sm-6">
                         <div class="form-group text-center">
                             <label>Pros</label>
+                            div.
                         </div>
                     </div>
                     <div class="col-sm-6">
@@ -208,14 +209,13 @@
                         </div>
                     </div>
                 </div><!-- /.row vdivide-->
-                <div class="col-sm-6 center-block" style="float:none">
-                    <form class="form-inline">
-                        <div class="form-group">
-                            <label class="sr-only" for="arguments">Arguments</label>
-                            <input type="text" class="form-control" id="arguments" placeholder="Argument Contents">
-                        </div>
-                        <button type="submit" class="btn btn-default">Submit</button>
-                    </form>
+                <div class="row center-block" style="float:none">
+                  <div class="input-group">
+                    <input type="text" placeholder="Enter your opinion" class="form-control" id="debate-text">
+                    <span class="input-group-btn">
+                      <button type="submit" class="btn btn-default" id="send-post">SEND</button>
+                    </span>
+                  </div>
                 </div><!-- /.row-->
             </div>
             <!-- /.container-fluid -->
